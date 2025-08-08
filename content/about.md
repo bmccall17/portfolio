@@ -5,7 +5,7 @@ draft: false
 layout: "about"
 ---
 
-# About Brett McCall
+# About Brett A McCall
 
 I'm a passionate full-stack developer with expertise in modern web technologies, specializing in React, Three.js, and interactive 3D experiences. I love creating engaging user interfaces and bringing creative ideas to life through code.
 

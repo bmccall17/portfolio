@@ -1,11 +1,11 @@
-baseURL = "https://brettamccall.github.io/brettamccall-portfolio"
+baseURL = "https://bmccall17.github.io/portfolio"
 languageCode = "en-us"
-title = "Brett McCall - Portfolio"
+title = "Brett A McCall - Portfolio"
 theme = ""
 
 [params]
-  author = "Brett McCall"
-  description = "Full-stack developer specializing in React, Three.js, and modern web technologies"
+  author = "Brett A McCall"
+  description = "Product leader specializing in spatial computing, React, Three.js, and modern web technologies"
 
 [markup]
   [markup.goldmark]
@@ -32,4 +32,4 @@ theme = ""
 [deployment]
   [[deployment.targets]]
     name = "github"
-    URL = "https://github.com/brettamccall/brettamccall-portfolio"
+    URL = "https://github.com/bmccall17/portfolio"

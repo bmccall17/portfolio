@@ -43,7 +43,7 @@ function Scene() {
           anchorY="middle"
           font="/fonts/Inter-Bold.woff"
         >
-          Brett McCall
+          Brett A McCall
         </Text>
       </Float>
     </>

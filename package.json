@@ -1,7 +1,7 @@
 {
-  "name": "brettamccall-portfolio",
+  "name": "portfolio",
   "version": "1.0.0",
-  "description": "Brett McCall's portfolio website built with Hugo and React Three Fiber",
+  "description": "Brett A McCall's portfolio website built with Hugo and React Three Fiber",
   "main": "assets/js/main.js",
   "scripts": {
     "dev": "vite",
@@ -37,10 +37,10 @@
     "3d",
     "webgl"
   ],
-  "author": "Brett McCall",
+  "author": "Brett A McCall",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/brettamccall/brettamccall-portfolio"
+    "url": "https://github.com/bmccall17/portfolio"
   }
 }
