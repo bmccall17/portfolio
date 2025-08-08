@@ -1,0 +1,35 @@
+baseURL = "https://brettamccall.github.io/brettamccall-portfolio"
+languageCode = "en-us"
+title = "Brett McCall - Portfolio"
+theme = ""
+
+[params]
+  author = "Brett McCall"
+  description = "Full-stack developer specializing in React, Three.js, and modern web technologies"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[build]
+  writeStats = true
+
+[module]
+  [module.mounts]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+
+[deployment]
+  [[deployment.targets]]
+    name = "github"
+    URL = "https://github.com/brettamccall/brettamccall-portfolio"
