@@ -1,0 +1,46 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Brett A McCall's portfolio website built with Hugo and React Three Fiber",
+  "main": "assets/js/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "hugo": "hugo server -D",
+    "hugo:build": "hugo --gc --minify"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@react-three/fiber": "^8.15.12",
+    "@react-three/drei": "^9.92.7",
+    "@react-three/postprocessing": "^2.15.11",
+    "three": "^0.158.0",
+    "framer-motion": "^10.16.16",
+    "leva": "^0.9.35",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@types/three": "^0.158.3",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
+  },
+  "keywords": [
+    "portfolio",
+    "react",
+    "three.js",
+    "hugo",
+    "3d",
+    "webgl"
+  ],
+  "author": "Brett A McCall",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bmccall17/portfolio"
+  }
+}

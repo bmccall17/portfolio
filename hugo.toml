@@ -1,0 +1,73 @@
+baseURL = "https://bmccall17.github.io/portfolio/"
+languageCode = "en-us"
+title = "Brett A McCall - Portfolio"
+#theme = ""
+googleAnalytics = ""
+
+[params]
+  author = "Brett A McCall"
+  description = "Visionary product leader and connector fostering meaningful collaboration and growth"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 10
+
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 20
+
+  [[menu.main]]
+    name = "Projects"
+    url = "/projects/"
+    weight = 30
+
+  [[menu.main]]
+    name = "AI Journey"
+    url = "/ai-journey/"
+    weight = 40
+
+  [[menu.main]]
+    name = "Media Portfolio"
+    url = "/media/"
+    weight = 50
+
+  [[menu.main]]
+    name = "Leadership Lab"
+    url = "/leadership/"
+    weight = 60
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[build]
+  writeStats = true
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+
+
+[module]
+  #manually added the second brackets around module.mounts
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+
+[deployment]
+  [[deployment.targets]]
+    name = "github"
+    URL = "https://github.com/bmccall17/portfolio"

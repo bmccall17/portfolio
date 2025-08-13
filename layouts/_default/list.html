@@ -1,0 +1,51 @@
+{{ define "main" }}
+<div>
+    <header>
+        <h1>{{ .Title }}</h1>
+        {{ if .Content }}
+        <div class="content">
+            {{ .Content }}
+        </div>
+        {{ end }}
+    </header>
+    
+    {{ if .Pages }}
+    <div style="margin-top: 2rem;">
+        {{ range .Pages }}
+        <article style="margin-bottom: 2rem; padding: 1.5rem; border: 1px solid #e0e0e0; border-radius: 0.5rem;">
+            <header>
+                <h2 style="margin-bottom: 0.5rem;">
+                    <a href="{{ .RelPermalink }}" style="text-decoration: none; color: #333;">{{ .Title }}</a>
+                </h2>
+                {{ if .Date }}
+                <time datetime="{{ .Date.Format "2006-01-02" }}" style="color: #666; font-size: 0.9rem;">
+                    {{ .Date.Format "January 2, 2006" }}
+                </time>
+                {{ end }}
+            </header>
+            
+            {{ if .Summary }}
+            <div style="margin-top: 1rem;">
+                {{ .Summary }}
+            </div>
+            {{ end }}
+            
+            {{ if .Params.tech }}
+            <div style="margin-top: 1rem;">
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    {{ range .Params.tech }}
+                    <span style="background: #f0f0f0; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.8rem;">{{ . }}</span>
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+            
+            <div style="margin-top: 1rem;">
+                <a href="{{ .RelPermalink }}" style="color: #007acc; text-decoration: none;">Read more →</a>
+            </div>
+        </article>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>
+{{ end }}

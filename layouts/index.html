@@ -1,0 +1,66 @@
+{{ define "main" }}
+<div style="text-align: center; padding: 2rem 0;">
+    <h1 style="font-size: 3rem; margin-bottom: 1rem; color: #333;">Brett A McCall</h1>
+    <p style="font-size: 1.5rem; color: #666; margin-bottom: 2rem;">Product Leader & 3D Web Specialist</p>
+    
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="/about" style="padding: 1rem 2rem; background: #007acc; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 500;">
+            About Me
+        </a>
+        <a href="/projects" style="padding: 1rem 2rem; background: #333; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 500;">
+            View Projects
+        </a>
+    </div>
+</div>
+
+<section style="margin-top: 3rem;">
+    <h2 style="text-align: center; margin-bottom: 2rem; color: #333;">Featured Projects</h2>
+    
+    {{ range where .Site.RegularPages "Params.featured" true }}
+    <article style="margin-bottom: 2rem; padding: 2rem; border: 1px solid #e0e0e0; border-radius: 0.5rem;">
+        <header>
+            <h3 style="margin-bottom: 0.5rem;">
+                <a href="{{ .RelPermalink }}" style="text-decoration: none; color: #333;">{{ .Title }}</a>
+            </h3>
+            {{ if .Date }}
+            <time datetime="{{ .Date.Format "2006-01-02" }}" style="color: #666; font-size: 0.9rem;">
+                {{ .Date.Format "January 2, 2006" }}
+            </time>
+            {{ end }}
+        </header>
+        
+        {{ if .Summary }}
+        <div style="margin-top: 1rem;">
+            {{ .Summary }}
+        </div>
+        {{ end }}
+        
+        {{ if .Params.tech }}
+        <div style="margin-top: 1rem;">
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                {{ range .Params.tech }}
+                <span style="background: #f0f0f0; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.8rem;">{{ . }}</span>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+        
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="{{ .RelPermalink }}" style="color: #007acc; text-decoration: none; font-weight: 500;">
+                Learn More →
+            </a>
+            {{ if .Params.demo }}
+            <a href="{{ .Params.demo }}" target="_blank" rel="noopener" style="color: #28a745; text-decoration: none; font-weight: 500;">
+                Live Demo ↗
+            </a>
+            {{ end }}
+            {{ if .Params.github }}
+            <a href="{{ .Params.github }}" target="_blank" rel="noopener" style="color: #333; text-decoration: none; font-weight: 500;">
+                GitHub ↗
+            </a>
+            {{ end }}
+        </div>
+    </article>
+    {{ end }}
+</section>
+{{ end }}
