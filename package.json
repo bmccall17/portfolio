@@ -4,6 +4,7 @@
   "description": "Brett A McCall's portfolio website built with Hugo and React Three Fiber",
   "main": "assets/js/main.js",
   "scripts": {
+    "start": "vite",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",

@@ -101,8 +101,7 @@
     
     <!-- Scripts -->
     <script type="module" src="{{ "js/main.js" | relURL }}"></script>
-
-    <!-- manually pasted -->
+    
     <!-- Analytics (supports legacy `googleAnalytics` and new services config). Safe if unset. -->
     {{- $gaID := or (site.Param "googleAnalytics") (site.Config.Services.GoogleAnalytics.ID) -}}
     {{- with $gaID }}

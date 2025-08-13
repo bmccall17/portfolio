@@ -1,7 +1,27 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "WebFetch(domain:betterthanunicorns.notion.site)",
+      "Bash(grep:*)",
+      "Bash(wget:*)",
+      "Bash(page_id=\"1c11b1c63fd680cd9a4cf436f759d6eb\")",
+      "Bash(image_id=\"c4574865-d55c-45e2-84a5-5d93e611c15a\")",
+      "Bash(curl:*)",
+      "Bash(ls:*)",
+      "Bash(cd:*)",
+      "Bash(cd:*)",
+      "Bash(cd:*)",
+      "WebFetch(domain:brettamccall.com)",
+      "Bash(cd:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(rmdir:*)",
+      "Bash(rm:*)",
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "Bash(git init:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": []
   }
