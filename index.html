@@ -333,6 +333,19 @@
             opacity: 0.7;
         }
 
+        /* Dark mode hyperlink styling */
+        body.dark a:not(.cta-button):not(.social-link):not(.nav-links a):not(.project-link) {
+            color: #ffffff;
+            text-decoration: underline;
+            text-decoration-color: #3b82f6;
+            text-underline-offset: 2px;
+        }
+
+        body.dark a:not(.cta-button):not(.social-link):not(.nav-links a):not(.project-link):hover {
+            color: #e5e7eb;
+            text-decoration-color: #60a5fa;
+        }
+
         .contact {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
