@@ -21,15 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
             this.life = 1.0; // 1.0 to 0.0
             this.char = Math.random() > 0.5 ? '1' : '0';
 
-            // "Vapor" movement - float slightly up or down, erratic horizontal
-            const speed = Math.random() * 0.5 + 0.2;
+            // Chaotic movement - random direction for all types
+            const speed = Math.random() * 0.4 + 0.1;
             const angle = Math.random() * Math.PI * 2;
 
-            this.vx = (Math.random() - 0.5) * 0.5; // Slight drift
-            this.vy = type === 'vapor' ? -speed : (Math.random() - 0.5) * 0.5; // Up for vapor, random for static
+            this.vx = Math.cos(angle) * speed;
+            this.vy = Math.sin(angle) * speed;
 
             this.size = Math.random() * 10 + 8; // 8-18px
-            this.decay = Math.random() * 0.02 + 0.01;
+            this.decay = Math.random() * 0.02 + 0.015;
 
             const palette = document.body.classList.contains('dark') ? colorsDark : colorsLight;
             this.color = palette[Math.floor(Math.random() * palette.length)];
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.x += this.vx;
             this.y += this.vy;
             this.life -= this.decay;
-            this.size *= 0.98; // Shrink
+            this.size *= 0.96; // Shrink
         }
 
         draw(ctx) {
@@ -64,8 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const now = Date.now();
         const dist = Math.hypot(mouse.x - mouse.lastX, mouse.y - mouse.lastY);
 
-        // Trail Effect
-        if (dist > 2) {
+        // Trail Effect - REDUCED 80%
+        // Only spawn if moved significant distance AND random chance
+        if (dist > 10 && Math.random() > 0.5) {
             spawnParticle(mouse.x, mouse.y, 'trail');
             mouse.lastMove = now;
             isIdle = false;
@@ -76,10 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
             isIdle = true;
         }
 
-        // Idle Leaking Effect
+        // Idle Leaking Effect - REDUCED 80%
         if (isIdle && mouse.x > 0) {
-            // Spawn more when idle
-            if (Math.random() > 0.8) {
+            // Spawn significantly less when idle (was > 0.8)
+            if (Math.random() > 0.96) {
                 const offsetX = (Math.random() - 0.5) * 40;
                 const offsetY = (Math.random() - 0.5) * 40;
                 spawnParticle(mouse.x + offsetX, mouse.y + offsetY, 'vapor');
@@ -87,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Random Ambient Vapor (Background)
-        if (Math.random() > 0.95) {
+        if (Math.random() > 0.98) {
             spawnParticle(Math.random() * width, Math.random() * height, 'vapor');
         }
 
