@@ -9,6 +9,25 @@
         content="Visionary product leader and connector fostering meaningful collaboration and growth">
     <script src="https://unpkg.com/colcade@0/colcade.js"></script>
     <script src="./static/js/binary-leak.js"></script>
+    <link rel="stylesheet" href="./static/css/update-gate.css">
+    <script>
+        window.UPDATE_DEFAULT_ON = false;
+    </script>
+    <script src="./static/js/update-gate.js"></script>
+    <style>
+        /* Manually ensure scopes are hidden/shown immediately to avoid flash */
+        .update-scope {
+            display: none;
+        }
+
+        html.update-active .update-scope {
+            display: block !important;
+        }
+
+        html.update-active .legacy-scope {
+            display: none !important;
+        }
+    </style>
     <style>
         * {
             margin: 0;
@@ -23,6 +42,10 @@
             background: #fff;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
+
+        /* ... (existing styles omitted for brevity in prompt, but I will keep them in file) ... */
+        /* Actually, I should use a smaller replace block for HEAD and a separate one for BODY to be safe. */
+        /* Cancelling this replace to use two targeted replaces. */
 
         body.dark {
             background: #191919;
@@ -538,249 +561,321 @@
     </header>
 
     <main id="main-content">
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Brett A McCall</h1>
-                    <div class="subtitle">Head of Product | 0→1 Product Manager | Human-Centered Innovation</div>
-                    <p class="description">Building the future of human connection, one product at a time. I help
-                        mission-driven teams design experiences that spark genuine participation and lasting change.
-                        Whether through immersive workshops, AI-powered conversations, or leadership development tools,
-                        I create technology that brings out the best in people and organizations.
-                    </p>
-                    <a href="#about" class="cta-button">Learn More</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="section">
-            <div class="container">
-                <h2>About</h2>
-                <div class="section-content">
-                    <div class="callout">
-                        <h3>Current Focus</h3>
-                        <p>Seeking a <strong>Head of Product</strong> role on a mission-driven team who is reimagining
-                            how humans learn, work, and connect. I bring 10+ years of experience leading
-                            cross-functional teams to design immersive, people-centered tools that spark participation
-                            and drive change. I'm especially drawn to companies that value creativity, support personal
-                            wellbeing, and encourage diverse perspectives. The best teams I've been a part of embraced
-                            curiosity, collaboration, and a little bit of weirdness. If that sounds like your culture,
-                            I'd love to <a href="#connect">connect</a>.</p>
+        <!-- LEGACY SCOPE -->
+        <div class="legacy-scope">
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Brett A McCall</h1>
+                        <div class="subtitle">Head of Product | 0→1 Product Manager | Human-Centered Innovation</div>
+                        <p class="description">Building the future of human connection, one product at a time. I help
+                            mission-driven teams design experiences that spark genuine participation and lasting change.
+                            Whether through immersive workshops, AI-powered conversations, or leadership development
+                            tools,
+                            I create technology that brings out the best in people and organizations.
+                        </p>
+                        <a href="#about" class="cta-button">Learn More</a>
                     </div>
+                </div>
+            </section>
 
-                    <div class="columns">
+            <section id="about" class="section">
+                <div class="container">
+                    <h2>About</h2>
+                    <div class="section-content">
                         <div class="callout">
-                            <h3>Key Achievements</h3>
-                            <ul style="color: #666; line-height: 1.8; margin-left: 20px;">
-                                <li><strong><span
-                                            style="font-family: Helvetica, Inter, Arial, sans-serif; font-weight: bold; color: #EB0028;">TEDx</span>Asheville</strong>
-                                    - Co-founder & Technical Producer since 2009</li>
-                                <li><strong>Philanthrosphere®</strong> - 30% reduction in development cycles</li>
-                                <li><strong>Mural XR Project Canvas</strong> - 22% increase in first-session retention,
-                                    40% increase in repeat engagement</li>
-                                <li><strong>AI Innovation</strong> - Developing YESYESNO Bot and exploring
-                                    conversational AI</li>
-                            </ul>
+                            <h3>Current Focus</h3>
+                            <p>Seeking a <strong>Head of Product</strong> role on a mission-driven team who is
+                                reimagining
+                                how humans learn, work, and connect. I bring 10+ years of experience leading
+                                cross-functional teams to design immersive, people-centered tools that spark
+                                participation
+                                and drive change. I'm especially drawn to companies that value creativity, support
+                                personal
+                                wellbeing, and encourage diverse perspectives. The best teams I've been a part of
+                                embraced
+                                curiosity, collaboration, and a little bit of weirdness. If that sounds like your
+                                culture,
+                                I'd love to <a href="#connect">connect</a>.</p>
+                        </div>
+
+                        <div class="columns">
+                            <div class="callout">
+                                <h3>Key Achievements</h3>
+                                <ul style="color: #666; line-height: 1.8; margin-left: 20px;">
+                                    <li><strong><span
+                                                style="font-family: Helvetica, Inter, Arial, sans-serif; font-weight: bold; color: #EB0028;">TEDx</span>Asheville</strong>
+                                        - Co-founder & Technical Producer since 2009</li>
+                                    <li><strong>Philanthrosphere®</strong> - 30% reduction in development cycles</li>
+                                    <li><strong>Mural XR Project Canvas</strong> - 22% increase in first-session
+                                        retention,
+                                        40% increase in repeat engagement</li>
+                                    <li><strong>AI Innovation</strong> - Developing YESYESNO Bot and exploring
+                                        conversational AI</li>
+                                </ul>
+                            </div>
+
+                            <div class="callout">
+                                <h3>Professional Values</h3>
+                                <ul style="color: #666; line-height: 1.8; margin-left: 20px;">
+                                    <li>Systemic Impact & Purpose-Driven Work</li>
+                                    <li>Collaborative Leadership & Psychological Safety</li>
+                                    <li>Continuous Learning & Growth Mindset</li>
+                                    <li>Strategic Systems Thinking</li>
+                                    <li>Process Design & Facilitation Excellence</li>
+                                    <li>Sustainable Work Practices</li>
+                                    <li>Creative Risk-Taking & Innovation</li>
+                                    <li>Inclusive Team Cultures</li>
+                                    <li>Practical Application Over Theory</li>
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="callout">
-                            <h3>Professional Values</h3>
-                            <ul style="color: #666; line-height: 1.8; margin-left: 20px;">
-                                <li>Systemic Impact & Purpose-Driven Work</li>
-                                <li>Collaborative Leadership & Psychological Safety</li>
-                                <li>Continuous Learning & Growth Mindset</li>
-                                <li>Strategic Systems Thinking</li>
-                                <li>Process Design & Facilitation Excellence</li>
-                                <li>Sustainable Work Practices</li>
-                                <li>Creative Risk-Taking & Innovation</li>
-                                <li>Inclusive Team Cultures</li>
-                                <li>Practical Application Over Theory</li>
-                            </ul>
+                            <h3>Current Mission</h3>
+                            <p>Creating technology that helps humans connect more meaningfully. I'm actively developing
+                                tools that transform how we collaborate, learn, and grow together.</p>
                         </div>
                     </div>
-
-                    <div class="callout">
-                        <h3>Current Mission</h3>
-                        <p>Creating technology that helps humans connect more meaningfully. I'm actively developing
-                            tools that transform how we collaborate, learn, and grow together.</p>
-                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="portfolio" class="section portfolio">
-            <div class="container">
-                <h2>Portfolio</h2>
-                <div class="project-grid" data-colcade="columns: .grid-col, items: .project-card">
-                    <!-- Column containers -->
-                    <div class="grid-col"></div>
-                    <div class="grid-col"></div>
-                    <div class="grid-col"></div>
+            <section id="portfolio" class="section portfolio">
+                <div class="container">
+                    <h2>Portfolio</h2>
+                    <div class="project-grid" data-colcade="columns: .grid-col, items: .project-card">
+                        <!-- Column containers -->
+                        <div class="grid-col"></div>
+                        <div class="grid-col"></div>
+                        <div class="grid-col"></div>
 
-                    <div class="project-card">
-                        <img src=".\static\images\about\tedx-bio.png" alt="TEDxAsheville" class="project-image">
-                        <!--<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 250px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold;">
+                        <div class="project-card">
+                            <img src=".\static\images\about\tedx-bio.png" alt="TEDxAsheville" class="project-image">
+                            <!--<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 250px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold;">
                             TEDxAsheville
                         </div> MANUALLY BLOCKED-->
-                        <div class="project-content">
-                            <h3><span
-                                    style="font-family: Helvetica, Inter, Arial, sans-serif; font-weight: bold; color: #EB0028;">TEDx</span>Asheville
-                            </h3>
-                            <p>Co-founder & Technical Producer since 2009. Creating meaningful dialogue and challenging
-                                assumptions through innovative presentations and technical production excellence.</p>
-                            <a href="https://tedxasheville.com/about" class="project-link" target="_blank">Learn More
-                                →</a>
+                            <div class="project-content">
+                                <h3><span
+                                        style="font-family: Helvetica, Inter, Arial, sans-serif; font-weight: bold; color: #EB0028;">TEDx</span>Asheville
+                                </h3>
+                                <p>Co-founder & Technical Producer since 2009. Creating meaningful dialogue and
+                                    challenging
+                                    assumptions through innovative presentations and technical production excellence.
+                                </p>
+                                <a href="https://tedxasheville.com/about" class="project-link" target="_blank">Learn
+                                    More
+                                    →</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="project-card">
-                        <img src="./static/images/projects/mural-xr/hero.png" alt="Mural XR Project"
-                            class="project-image">
-                        <div class="project-content">
-                            <h3>Mural XR Project Canvas</h3>
-                            <p>Innovative XR collaboration tool that achieved 40% increase in repeat engagement.
-                                Transforming how teams collaborate in virtual spaces.</p>
-                            <a href="https://ptom.net/xr/" class="project-link" target="_blank">Learn More on Paul's
-                                canvas →</a>
+                        <div class="project-card">
+                            <img src="./static/images/projects/mural-xr/hero.png" alt="Mural XR Project"
+                                class="project-image">
+                            <div class="project-content">
+                                <h3>Mural XR Project Canvas</h3>
+                                <p>Innovative XR collaboration tool that achieved 40% increase in repeat engagement.
+                                    Transforming how teams collaborate in virtual spaces.</p>
+                                <a href="https://ptom.net/xr/" class="project-link" target="_blank">Learn More on Paul's
+                                    canvas →</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="project-card">
-                        <img src=".\static\images\ai-journey\hero.png" alt="My AI Journey: From 1993 to Now"
-                            class="project-image">
-                        <div class="project-content">
-                            <h3>My AI Journey: From 1993 to Now</h3>
-                            <p>Started back in 1993, when I landed my first internship at Texas Instruments in the
-                                Speech Recognition Division. I literally trained a language model to interpret speech
-                                waveforms...back when most people were just discovering email and connecting to the
-                                internet via dial-up</p>
-                            <a href="https://betterthanunicorns.notion.site/Brett-s-AI-Journey-From-1993-to-Now-1e61b1c63fd6801294becd2db64201b5"
-                                class="project-link" target="_blank">Learn More →</a>
+                        <div class="project-card">
+                            <img src=".\static\images\ai-journey\hero.png" alt="My AI Journey: From 1993 to Now"
+                                class="project-image">
+                            <div class="project-content">
+                                <h3>My AI Journey: From 1993 to Now</h3>
+                                <p>Started back in 1993, when I landed my first internship at Texas Instruments in the
+                                    Speech Recognition Division. I literally trained a language model to interpret
+                                    speech
+                                    waveforms...back when most people were just discovering email and connecting to the
+                                    internet via dial-up</p>
+                                <a href="https://betterthanunicorns.notion.site/Brett-s-AI-Journey-From-1993-to-Now-1e61b1c63fd6801294becd2db64201b5"
+                                    class="project-link" target="_blank">Learn More →</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="project-card">
-                        <img src="./static/images/projects/tarottalks.png" alt="Ghost Job Detector"
-                            class="project-image">
-                        <div class="project-content">
-                            <h3>Tarot<span
-                                    style="font-family: Helvetica, Inter, Arial, sans-serif; font-weight: bold; color: #EB0028;">TALKS</span>
-                            </h3>
-                            <p>Mapping the Tarot deck to <span
-                                    style="font-family: Helvetica, Inter, Arial, sans-serif; font-weight: bold; color: #EB0028;">TED</span>
-                                talks... where each card in the deck is paired with talks that echo its wisdom. Can you
-                                find the easter egg? ♘🏆</p>
-                            <a href="https://tarottalks.app/" class="project-link" target="_blank">Live Now →</a>
+                        <div class="project-card">
+                            <img src="./static/images/projects/tarottalks.png" alt="Ghost Job Detector"
+                                class="project-image">
+                            <div class="project-content">
+                                <h3>Tarot<span
+                                        style="font-family: Helvetica, Inter, Arial, sans-serif; font-weight: bold; color: #EB0028;">TALKS</span>
+                                </h3>
+                                <p>Mapping the Tarot deck to <span
+                                        style="font-family: Helvetica, Inter, Arial, sans-serif; font-weight: bold; color: #EB0028;">TED</span>
+                                    talks... where each card in the deck is paired with talks that echo its wisdom. Can
+                                    you
+                                    find the easter egg? ♘🏆</p>
+                                <a href="https://tarottalks.app/" class="project-link" target="_blank">Live Now →</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="project-card">
-                        <img src="./static/images/projects/philanthrosphere/hero.png" alt="Philanthrosphere"
-                            class="project-image">
-                        <div class="project-content">
-                            <h3>philanthrosphere®</h3>
-                            <p>PS Loop® offers a suite of easy-to-use tools for building "billboards," looping content
-                                ready for on-screen presentation. Achieved 30% reduction in development cycles.</p>
-                            <a href="https://www.philanthrosphere.com/" class="project-link" target="_blank">Learn More
-                                →</a>
+                        <div class="project-card">
+                            <img src="./static/images/projects/philanthrosphere/hero.png" alt="Philanthrosphere"
+                                class="project-image">
+                            <div class="project-content">
+                                <h3>philanthrosphere®</h3>
+                                <p>PS Loop® offers a suite of easy-to-use tools for building "billboards," looping
+                                    content
+                                    ready for on-screen presentation. Achieved 30% reduction in development cycles.</p>
+                                <a href="https://www.philanthrosphere.com/" class="project-link" target="_blank">Learn
+                                    More
+                                    →</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="project-card">
-                        <img src=".\static\images\media\hero.png" alt="Production: Film, Video, Podcast Portfolio"
-                            class="project-image">
-                        <div class="project-content">
-                            <h3>Production: Film, Video, Podcast Portfolio</h3>
-                            <p>All my work in films, podcasts, and esports, with links to projects as a producer,
-                                speaker, talent, announcer, and executive producer, along with IMDB credits and podcast
-                                episodes</p>
-                            <a href="https://www.notion.so/Film-Video-Podcast-Production-Portfolio-Brett-A-McCall-18d1b1c63fd680b886f8d9af851dd03b"
-                                class="project-link" target="_blank">Call Time →</a>
+                        <div class="project-card">
+                            <img src=".\static\images\media\hero.png" alt="Production: Film, Video, Podcast Portfolio"
+                                class="project-image">
+                            <div class="project-content">
+                                <h3>Production: Film, Video, Podcast Portfolio</h3>
+                                <p>All my work in films, podcasts, and esports, with links to projects as a producer,
+                                    speaker, talent, announcer, and executive producer, along with IMDB credits and
+                                    podcast
+                                    episodes</p>
+                                <a href="https://www.notion.so/Film-Video-Podcast-Production-Portfolio-Brett-A-McCall-18d1b1c63fd680b886f8d9af851dd03b"
+                                    class="project-link" target="_blank">Call Time →</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="project-card">
-                        <img src="./static/images/projects/winter-vr-summit/hero.png" alt="Winter VR Summit"
-                            class="project-image">
-                        <div class="project-content">
-                            <h3>Winter VR Summit</h3>
-                            <p>Annual virtual reality conference bringing together industry leaders, creators, and
-                                innovators to explore the future of immersive technologies.</p>
-                            <a href="https://www.dropbox.com/scl/fi/rd3a3taugdpqqq7hgyd2f/BTU_GWG2022Summit-EventReport_PresentationFINAL.pdf?rlkey=ihjf9stbqjxmzs3plvi0vdchk&st=zhkrh2cc&dl=0"
-                                class="project-link" target="_blank">Learn More →</a>
+                        <div class="project-card">
+                            <img src="./static/images/projects/winter-vr-summit/hero.png" alt="Winter VR Summit"
+                                class="project-image">
+                            <div class="project-content">
+                                <h3>Winter VR Summit</h3>
+                                <p>Annual virtual reality conference bringing together industry leaders, creators, and
+                                    innovators to explore the future of immersive technologies.</p>
+                                <a href="https://www.dropbox.com/scl/fi/rd3a3taugdpqqq7hgyd2f/BTU_GWG2022Summit-EventReport_PresentationFINAL.pdf?rlkey=ihjf9stbqjxmzs3plvi0vdchk&st=zhkrh2cc&dl=0"
+                                    class="project-link" target="_blank">Learn More →</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="project-card">
-                        <img src="./static/images/projects/avl1000.png" alt="AVL1000" class="project-image">
-                        <div class="project-content">
-                            <h3>AVL1000</h3>
-                            <p>Discover meaningful connections through shared events and interests. AVL1000 helps you
-                                find the 10 most important people to meet next in your personal "Actual 1000."</p>
-                            <a href="https://avl1000demo.figma.site/" class="project-link" target="_blank">In Production
-                                →</a>
+                        <div class="project-card">
+                            <img src="./static/images/projects/avl1000.png" alt="AVL1000" class="project-image">
+                            <div class="project-content">
+                                <h3>AVL1000</h3>
+                                <p>Discover meaningful connections through shared events and interests. AVL1000 helps
+                                    you
+                                    find the 10 most important people to meet next in your personal "Actual 1000."</p>
+                                <a href="https://avl1000demo.figma.site/" class="project-link" target="_blank">In
+                                    Production
+                                    →</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="project-card">
-                        <img src="./static/images/projects/yesyesno-bot/hero.png" alt="YESYESNO Bot"
-                            class="project-image">
-                        <div class="project-content">
-                            <h3>YESYESNO Bot</h3>
-                            <p>AI-powered conversational bot exploring the boundaries of human-AI interaction and
-                                collaborative intelligence in modern workplace environments.</p>
-                            <a href="https://chatgpt.com/g/g-68853015ce74819184da33338ebce8a3-yesyesno"
-                                class="project-link" target="_blank">Learn More →</a>
+                        <div class="project-card">
+                            <img src="./static/images/projects/yesyesno-bot/hero.png" alt="YESYESNO Bot"
+                                class="project-image">
+                            <div class="project-content">
+                                <h3>YESYESNO Bot</h3>
+                                <p>AI-powered conversational bot exploring the boundaries of human-AI interaction and
+                                    collaborative intelligence in modern workplace environments.</p>
+                                <a href="https://chatgpt.com/g/g-68853015ce74819184da33338ebce8a3-yesyesno"
+                                    class="project-link" target="_blank">Learn More →</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="project-card">
-                        <img src=".\static\images\leadership\listening-lab.png" alt="the Listening Leadership Lab"
-                            class="project-image">
-                        <div class="project-content">
-                            <h3>the Listening Leadership Lab</h3>
-                            <p>Personal Project: a lab for practicing presence and the art of listening</p>
-                            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7328479147847028738/"
-                                class="project-link" target="_blank">Learn More →</a>
+                        <div class="project-card">
+                            <img src=".\static\images\leadership\listening-lab.png" alt="the Listening Leadership Lab"
+                                class="project-image">
+                            <div class="project-content">
+                                <h3>the Listening Leadership Lab</h3>
+                                <p>Personal Project: a lab for practicing presence and the art of listening</p>
+                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7328479147847028738/"
+                                    class="project-link" target="_blank">Learn More →</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="project-card">
-                        <img src="./static/images/projects/soundslikehome/hero.png" alt="Sounds Like Home"
-                            class="project-image">
-                        <div class="project-content">
-                            <h3>Sounds Like Home</h3>
-                            <p>Community-driven audio storytelling platform connecting people through shared experiences
-                                and meaningful narratives that celebrate diversity. Web app currently in development.
-                            </p>
-                            <a href="https://github.com/bmccall17/soundslikehome" class="project-link"
-                                target="_blank">HALTED Production, See on GitHub →</a>
+                        <div class="project-card">
+                            <img src="./static/images/projects/soundslikehome/hero.png" alt="Sounds Like Home"
+                                class="project-image">
+                            <div class="project-content">
+                                <h3>Sounds Like Home</h3>
+                                <p>Community-driven audio storytelling platform connecting people through shared
+                                    experiences
+                                    and meaningful narratives that celebrate diversity. Web app currently in
+                                    development.
+                                </p>
+                                <a href="https://github.com/bmccall17/soundslikehome" class="project-link"
+                                    target="_blank">HALTED Production, See on GitHub →</a>
+                            </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="connect" class="section connect">
-            <div class="container">
-                <h2>Connect</h2>
-                <p style="font-size: 1.2rem; margin-top: 20px; opacity: 0.9;">
-                    I am always open to meaningful conversations about leadership, innovation, spatial computing,
-                    intelligence, and the future of human collaboration.
-                </p>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/brettmccall" class="social-link" target="_blank">LinkedIn</a>
-                    <a href="https://github.com/bmccall17" class="social-link" target="_blank">GitHub</a>
-                    <a href="https://bmccall17.medium.com/" class="social-link" target="_blank">Medium</a>
-                    <a href="https://x.com/bmccall17" class="social-link" target="_blank">Twitter</a>
-                    <a href="https://www.crunchbase.com/person/brett-mccall-7ea2" class="social-link"
-                        target="_blank">Crunchbase</a>
-                    <a href="https://www.betterthanunicorns.com/brett" class="social-link" target="_blank">Book a
-                        Call</a>
+            <section id="connect" class="section connect">
+                <div class="container">
+                    <h2>Connect</h2>
+                    <p style="font-size: 1.2rem; margin-top: 20px; opacity: 0.9;">
+                        I am always open to meaningful conversations about leadership, innovation, spatial computing,
+                        intelligence, and the future of human collaboration.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/brettmccall" class="social-link"
+                            target="_blank">LinkedIn</a>
+                        <a href="https://github.com/bmccall17" class="social-link" target="_blank">GitHub</a>
+                        <a href="https://bmccall17.medium.com/" class="social-link" target="_blank">Medium</a>
+                        <a href="https://x.com/bmccall17" class="social-link" target="_blank">Twitter</a>
+                        <a href="https://www.crunchbase.com/person/brett-mccall-7ea2" class="social-link"
+                            target="_blank">Crunchbase</a>
+                        <a href="https://www.betterthanunicorns.com/brett" class="social-link" target="_blank">Book a
+                            Call</a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
+
+        <!-- UPDATE SCOPE -->
+        <div class="update-scope">
+            <section class="hero" style="background: #111; color: #fff;">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 style="font-size: 2.5rem; line-height: 1.2;">I build products and experiences that
+                            measurably increase participation, learning, and adoption.</h1>
+                        <p class="description" style="font-size: 1.25rem; margin-top: 1rem; color: #ccc;">
+                            Especially in immersive + AI-enabled collaboration.
+                        </p>
+
+                        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <div class="callout"
+                                style="background: #222; border-left: 4px solid #fff; flex: 1; min-width: 250px;">
+                                <h3 style="color: #fff;">TEDx Asheville</h3>
+                                <p style="color: #aaa;">Co-founder & Technical Producer (14+ yrs)</p>
+                            </div>
+                            <div class="callout"
+                                style="background: #222; border-left: 4px solid #fff; flex: 1; min-width: 250px;">
+                                <h3 style="color: #fff;">Philanthrosphere</h3>
+                                <p style="color: #aaa;">Reduced dev cycles by 30%</p>
+                            </div>
+                            <div class="callout"
+                                style="background: #222; border-left: 4px solid #fff; flex: 1; min-width: 250px;">
+                                <h3 style="color: #fff;">Mural XR</h3>
+                                <p style="color: #aaa;">40% increase in repeat engagement</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 3rem;">
+                            <a href="#about-update" class="cta-button">See How I Do It</a>
+                            <a href="#offer-update" class="cta-button"
+                                style="background: transparent; border: 2px solid white; margin-left: 1rem;">Work With
+                                Me</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about-update" class="section">
+                <div class="container">
+                    <h2>About (Legible)</h2>
+                    <p>I don't just "manage products"; I build systems that allow teams to ship valuable, impactful
+                        software.</p>
+                </div>
+            </section>
+        </div>
+
     </main>
 
     <footer>
