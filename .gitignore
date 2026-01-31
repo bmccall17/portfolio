@@ -7,7 +7,7 @@ yarn-error.log*
 # Build outputs
 dist/
 build/
-static/js/
+# commented out manually: static/js/
 
 # Environment variables
 .env
