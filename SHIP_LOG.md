@@ -7,10 +7,11 @@ A running log of production releases and deployments for the Brett A McCall port
 ## [v1.2.0] - 2026-01-31
 
 ### Added
-- **Binary Leak Effect**: Implemented Matrix-style binary rain animation in Hero section
-  - Canvas-based animation with theme-aware colors
-  - Responsive density and smooth trail effects
-  - Positioned as subtle background layer in Hero
+- **Binary Leak Effect**: Implemented interactive "Data Vapor" animation in Hero section
+  - Canvas-based particle system with chaos-driven movement
+  - **Interactivity**: Mouse trail and "idle cloud" accumulation effect
+  - **Dynamic**: Particles disperse on interaction and collect when idle
+  - Fully responsive and theme-aware (Dark/Light mode)
 
 
 
