@@ -4,6 +4,17 @@ A running log of production releases and deployments for the Brett A McCall port
 
 ---
 
+## [v1.1.1] - 2026-01-31
+
+### Fixed
+- **Accessibility (A11y)**: Addressed critical high-priority issues from Design Audit
+  - **Skip Link**: Added "Skip to main content" link for keyboard navigation
+  - **Color Contrast**: Darkened text colors (`#505050`) to meet WCAG AA standards
+  - **Theme Toggle**: Added ARIA labels and state management for screen readers
+
+### Files Modified
+- `index.html`
+
 ## [v1.1.0] - 2026-01-01
 
 ### Added

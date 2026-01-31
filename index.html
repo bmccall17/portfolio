@@ -26,6 +26,20 @@
             color: #fff;
         }
 
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #667eea;
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 9999;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
         .shimmer {
             background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
             background-size: 200% 100%;
@@ -259,7 +273,7 @@
         }
 
         .callout p {
-            color: #666;
+            color: #505050;
             line-height: 1.8;
         }
 
@@ -347,7 +361,7 @@
         }
 
         .project-content p {
-            color: #666;
+            color: #505050;
             line-height: 1.7;
             margin-bottom: 20px;
         }
@@ -476,6 +490,7 @@
     </style>
 </head>
 <body class="fade-in">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header>
         <nav class="container">
             <div class="logo">Brett A McCall</div>
@@ -484,11 +499,13 @@
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#connect">Connect</a></li>
             </ul>
-            <button class="theme-toggle" onclick="toggleTheme()">🌓 Theme</button>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" aria-pressed="false">
+                <span aria-hidden="true">🌓</span> Theme
+            </button>
         </nav>
     </header>
 
-    <main>
+    <main id="main-content">
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
@@ -694,13 +711,22 @@
             document.body.classList.toggle('dark');
             const isDark = document.body.classList.contains('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            
+            const toggle = document.querySelector('.theme-toggle');
+            if (toggle) toggle.setAttribute('aria-pressed', isDark);
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+            
+            if (isDark) {
                 document.body.classList.add('dark');
             }
+            
+            const toggle = document.querySelector('.theme-toggle');
+            if (toggle) toggle.setAttribute('aria-pressed', isDark);
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
