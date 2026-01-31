@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         constructor(x, y, type = 'trail') {
             this.x = x;
             this.y = y;
-            this.life = 1.0; // 1.0 to 0.0
+            this.life = 1.0;
             this.char = Math.random() > 0.5 ? '1' : '0';
 
-            // Chaotic movement - random direction for all types
+            // Chaotic movement
             const speed = Math.random() * 0.4 + 0.1;
             const angle = Math.random() * Math.PI * 2;
 
@@ -29,10 +29,21 @@ document.addEventListener('DOMContentLoaded', () => {
             this.vy = Math.sin(angle) * speed;
 
             this.size = Math.random() * 10 + 8; // 8-18px
-            this.decay = Math.random() * 0.02 + 0.015;
+
+            // Persistent idle particles move slightly outward from mouse center if "vapor"
+            if (type === 'vapor' && isIdle) {
+                // Calculate angle from mouse
+                const angleFromMouse = Math.atan2(y - mouse.y, x - mouse.x);
+                this.vx = Math.cos(angleFromMouse) * speed;
+                this.vy = Math.sin(angleFromMouse) * speed;
+                this.decay = 0.002; // Very slow decay for collection effect
+            } else {
+                this.decay = Math.random() * 0.02 + 0.015;
+            }
 
             const palette = document.body.classList.contains('dark') ? colorsDark : colorsLight;
             this.color = palette[Math.floor(Math.random() * palette.length)];
+            this.type = type; // Track type for cleanup
         }
 
         update() {
@@ -43,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         draw(ctx) {
-            ctx.globalAlpha = this.life;
+            ctx.globalAlpha = Math.max(0, this.life);
             ctx.fillStyle = this.color;
             ctx.font = `${this.size}px monospace`;
             ctx.fillText(this.char, this.x, this.y);
@@ -64,12 +75,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const now = Date.now();
         const dist = Math.hypot(mouse.x - mouse.lastX, mouse.y - mouse.lastY);
 
-        // Trail Effect - REDUCED 80%
-        // Only spawn if moved significant distance AND random chance
-        if (dist > 10 && Math.random() > 0.5) {
-            spawnParticle(mouse.x, mouse.y, 'trail');
-            mouse.lastMove = now;
+        // Movement detected
+        if (dist > 10) {
+            // Wake up idle particles if we were idle
+            if (isIdle) {
+                particles.forEach(p => {
+                    if (p.decay < 0.01) p.decay = 0.05; // Rapid fade for old idle particles
+                });
+            }
             isIdle = false;
+            mouse.lastMove = now;
+
+            // Trail Effect
+            if (Math.random() > 0.5) {
+                spawnParticle(mouse.x, mouse.y, 'trail');
+            }
         }
 
         // Idle Detection (>200ms stop)
@@ -77,19 +97,19 @@ document.addEventListener('DOMContentLoaded', () => {
             isIdle = true;
         }
 
-        // Idle Leaking Effect - REDUCED 80%
+        // Idle Leaking Effect (Accumulation)
         if (isIdle && mouse.x > 0) {
-            // Spawn significantly less when idle (was > 0.8)
-            if (Math.random() > 0.96) {
-                const offsetX = (Math.random() - 0.5) * 40;
-                const offsetY = (Math.random() - 0.5) * 40;
+            // Spawn consistently to build up cloud
+            if (Math.random() > 0.8) {
+                const offsetX = (Math.random() - 0.5) * 60; // Wider spread
+                const offsetY = (Math.random() - 0.5) * 60;
                 spawnParticle(mouse.x + offsetX, mouse.y + offsetY, 'vapor');
             }
         }
 
         // Random Ambient Vapor (Background)
         if (Math.random() > 0.98) {
-            spawnParticle(Math.random() * width, Math.random() * height, 'vapor');
+            spawnParticle(Math.random() * width, Math.random() * height, 'ambient');
         }
 
         mouse.lastX = mouse.x;
@@ -97,17 +117,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function animate() {
-        ctx.clearRect(0, 0, width, height); // Clear frame
+        ctx.clearRect(0, 0, width, height);
 
         handleMouse();
 
-        // Update and draw particles backwards to remove safely
         for (let i = particles.length - 1; i >= 0; i--) {
             const p = particles[i];
             p.update();
             p.draw(ctx);
 
-            if (p.life <= 0 || p.size < 1) {
+            if (p.life <= 0 || p.size < 0.5) {
                 particles.splice(i, 1);
             }
         }
@@ -123,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
         mouse.y = e.clientY - rect.top;
     });
 
-    // Start
     resize();
     animate();
 });

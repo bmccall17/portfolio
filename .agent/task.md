@@ -1,4 +1,4 @@
-# Task: Implement "Binary Leak" Visual Effect (Refined V2) [COMPLETED]
+# Task: Implement "Binary Leak" Visual Effect (Refined V3) [COMPLETED]
 
 ## Context
 The user requested a refined "Binary Leak Effect" to be more subtle and interactive. The previous "Matrix rain" was too aggressive.
