@@ -69,3 +69,6 @@ resources/
 
 # Screenshots for debugging (optional - remove if you want to track them)
 screenshotsfordebugging/
+
+# manually adding docs folder to prevent git from tracking it
+docs/
