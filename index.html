@@ -10,6 +10,7 @@
     <script src="https://unpkg.com/colcade@0/colcade.js"></script>
     <script src="./static/js/binary-leak.js"></script>
     <link rel="stylesheet" href="./static/css/update-gate.css">
+    <link rel="stylesheet" href="./static/css/v2-design.css">
     <script>
         window.UPDATE_DEFAULT_ON = false;
     </script>
@@ -830,252 +831,184 @@
 
         <!-- UPDATE SCOPE -->
         <div class="update-scope">
+
+            <!-- Minimal Nav -->
+            <nav class="nav-minimal">
+                <div style="font-weight: 700; font-family: var(--font-serif);">Brett A McCall</div>
+                <div style="display: flex; gap: 2rem;">
+                    <a href="#work">Work</a>
+                    <a href="#about-v2">About</a>
+                    <a href="#now">Now</a>
+                    <a href="#connect-v2">Connect</a>
+                </div>
+            </nav>
+
             <!-- HERO -->
-            <section class="hero" style="background: #111; color: #fff; padding: 120px 0;">
-                <div class="container">
-                    <div class="hero-content" style="max-width: 900px; margin: 0 auto; text-align: left;">
-                        <h1
-                            style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 2rem; font-weight: 800; letter-spacing: -0.02em;">
-                            I build products that measurably increase participation, learning, and adoption.
-                        </h1>
-                        <p class="description"
-                            style="font-size: 1.5rem; color: #aaa; margin-bottom: 3rem; max-width: 700px; line-height: 1.4;">
-                            Specfically in <strong>immersive environments</strong> and <strong>AI-enabled
-                                collaboration</strong>. I translate "visionary" ideas into shipping software.
+            <section id="work" style="margin-bottom: 8rem; padding-top: 4rem;">
+                <h1 style="max-width: 18ch;">Product Leadership for the Spatial Web.</h1>
+                <p style="font-size: 1.5rem; color: var(--ink-gray); margin-bottom: 2rem;">
+                    I bridge the gap between "Visionary" ideas and shipping software.
+                </p>
+                <div
+                    style="display: flex; gap: 2rem; font-size: 0.95rem; color: var(--ink-light); margin-bottom: 3rem;">
+                    <span>📍 14 Years Experience</span>
+                    <span>🛠️ 0 → 1 Specialist</span>
+                    <span>🧠 AI & XR Native</span>
+                </div>
+            </section>
+
+            <!-- FEATURED WORK (Split Frames) -->
+
+            <!-- CASE 1: TEDx -->
+            <article class="split-frame">
+                <div class="artifact-panel">
+                    <img src="./static/images/about/tedx-bio.png" alt="TEDx Stage Production">
+                </div>
+                <div class="meaning-panel">
+                    <h2>TEDxAsheville</h2>
+                    <p style="margin-bottom: 2rem;">Building a resilient "Production OS" for a high-stakes volunteer
+                        organization.</p>
+
+                    <div class="project-meta">
+                        <div class="meta-item"><strong>Role</strong> Co-founder & Tech Producer</div>
+                        <div class="meta-item"><strong>Result</strong> 14 Years Sold Out</div>
+                        <div class="meta-item"><strong>Constraint</strong> $0 Budget / 100% Volunteer</div>
+                        <div class="meta-item"><strong>User</strong> 1200+ Live Attendees</div>
+                    </div>
+
+                    <div class="meditation-line">
+                        "If the speaker doesn't feel safe, the audience won't feel anything."
+                    </div>
+
+                    <p>The challenge wasn't just putting on an event; it was designing a system that could survive
+                        leadership turnover. We engineered a reusable playbook for coaching, stage design, and video
+                        production that removed fragility from the process.</p>
+
+                    <a href="https://tedxasheville.com/about" target="_blank" class="btn-text">View the Event Archive
+                        ↗</a>
+                </div>
+            </article>
+
+            <!-- CASE 2: Philanthrosphere -->
+            <article class="split-frame">
+                <div class="artifact-panel">
+                    <img src="./static/images/projects/philanthrosphere/hero.png" alt="Philanthrosphere Dashboard">
+                </div>
+                <div class="meaning-panel">
+                    <h2>Philanthrosphere</h2>
+                    <p style="margin-bottom: 2rem;">Reducing development cycles by 30% through ruthless subtraction.</p>
+
+                    <div class="project-meta">
+                        <div class="meta-item"><strong>Role</strong> Product Lead</div>
+                        <div class="meta-item"><strong>Result</strong> -30% Dev Time</div>
+                        <div class="meta-item"><strong>Constraint</strong> Legacy Codebase</div>
+                        <div class="meta-item"><strong>User</strong> Non-Profit Admins</div>
+                    </div>
+
+                    <div class="margin-note">
+                        NOTE: The decision wasn't the feature — it was the constraint we chose. We killed 40% of the
+                        "roadmap" on day one.
+                    </div>
+
+                    <p>Legacy fundraising tools were clunky. We didn't add AI or blockchain; we streamlined the "Donor
+                        Loop"—the core repeatable behavior of the user. By optimizing database queries and removing
+                        "nice-to-haves," we increased data entry compliance significantly.</p>
+
+                    <div class="craft-panel">
+                        // OPERATING PRINCIPLE<br>
+                        IF (feature_usage < 5%) {<br>
+                            &nbsp;&nbsp;DEPRECATE();<br>
+                            &nbsp;&nbsp;CELEBRATE();<br>
+                            }
+                    </div>
+
+                    <br>
+                    <a href="https://www.philanthrosphere.com/" target="_blank" class="btn-text">See the Platform ↗</a>
+                </div>
+            </article>
+
+            <!-- CASE 3: Mural XR -->
+            <article class="split-frame">
+                <div class="artifact-panel">
+                    <img src="./static/images/projects/mural-xr/hero.png" alt="Mural XR Spatial Interface">
+                </div>
+                <div class="meaning-panel">
+                    <h2>Mural XR Project Canvas</h2>
+                    <p style="margin-bottom: 2rem;">Translating 2D collaboration into 3D spatial intuition.</p>
+
+                    <div class="project-meta">
+                        <div class="meta-item"><strong>Role</strong> Spatial Designer</div>
+                        <div class="meta-item"><strong>Result</strong> +40% Repeat Engagement</div>
+                        <div class="meta-item"><strong>Constraint</strong> WebXR Performance</div>
+                        <div class="meta-item"><strong>User</strong> Remote Agile Teams</div>
+                    </div>
+
+                    <div class="meditation-line">
+                        "Spatial context transforms data into a landscape you can remember."
+                    </div>
+
+                    <p>Remote work is flat. By moving project planning into a spatial environment where users could
+                        "walk" through their timeline, we triggered spatial memory, making complex project states
+                        intuitive to grasp in seconds.</p>
+
+                    <a href="https://ptom.net/xr/" target="_blank" class="btn-text">Walk the Canvas ↗</a>
+                </div>
+            </article>
+
+            <!-- PRINCIPLES -->
+            <section style="margin-bottom: 8rem; max-width: 800px;">
+                <h2 style="border: none; margin-bottom: 3rem;">Operating Principles</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                    <div>
+                        <h3
+                            style="font-size: 1.1rem; font-weight: 600; font-family: var(--font-sans); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Outcomes over Output</h3>
+                        <p style="font-size: 1rem;">I don't measure success by code shipped, but by behavior changed.
                         </p>
+                    </div>
+                    <div>
+                        <h3
+                            style="font-size: 1.1rem; font-weight: 600; font-family: var(--font-sans); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Clear is Kind</h3>
+                        <p style="font-size: 1rem;">Ambiguity is the enemy of velocity. I force clarity early.</p>
+                    </div>
+                    <div>
+                        <h3
+                            style="font-size: 1.1rem; font-weight: 600; font-family: var(--font-sans); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Systemic Safety</h3>
+                        <p style="font-size: 1rem;">Teams only take risks when they feel psychologically safe.</p>
+                    </div>
+                    <div>
+                        <h3
+                            style="font-size: 1.1rem; font-weight: 600; font-family: var(--font-sans); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Practical Magic</h3>
+                        <p style="font-size: 1rem;">Technology should feel like magic, but build like a brick house.</p>
+                    </div>
+                </div>
+            </section>
 
-                        <!-- Impact Highlights -->
-                        <div
-                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
-                            <div style="border-top: 2px solid #333; padding-top: 1rem;">
-                                <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem;">TEDx Asheville</h3>
-                                <p style="color: #888; font-size: 1rem;">Co-founder & Technical Producer (14 yrs). Built
-                                    the engine that sold out every event.</p>
-                            </div>
-                            <div style="border-top: 2px solid #333; padding-top: 1rem;">
-                                <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem;">Philanthrosphere
-                                </h3>
-                                <p style="color: #888; font-size: 1rem;">Reduced development cycles by 30% via systemic
-                                    process design.</p>
-                            </div>
-                            <div style="border-top: 2px solid #333; padding-top: 1rem;">
-                                <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.5rem;">Mural XR</h3>
-                                <p style="color: #888; font-size: 1rem;">Achieved 22% lift in retention and 40% in
-                                    repeat engagement.</p>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; gap: 1.5rem; align-items: center;">
-                            <a href="#offer-update" class="cta-button"
-                                style="background: #fff; color: #000; border: 2px solid #fff;">Work With Me</a>
-                            <a href="#about-update"
-                                style="color: #fff; text-decoration: underline; text-underline-offset: 4px;">Read My
-                                Operating System</a>
+            <!-- NOW / CONNECT -->
+            <section id="connect-v2"
+                style="background: #e8e8e4; padding: 4rem; border-radius: 4px; margin-bottom: 4rem;">
+                <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
+                    <div>
+                        <h2 style="border: none; margin-bottom: 1rem;">Let's Build.</h2>
+                        <p style="margin-bottom: 2rem;">I am currently open to <strong>Head of Product</strong> or
+                            <strong>Senior PM</strong> roles in mission-driven organizations.</p>
+                        <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                            <a href="mailto:hello@brettamccall.com" class="btn-text">Email Me ↗</a>
+                            <a href="https://www.linkedin.com/in/brettmccall" target="_blank" class="btn-text">LinkedIn
+                                ↗</a>
+                            <a href="#offer-update" class="btn-text">Book Strategy Session ↗</a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ABOUT / OPERATING SYSTEM -->
-            <section id="about-update" class="section" style="background: #fff; color: #111;">
-                <div class="container" style="max-width: 900px;">
-                    <h2 style="font-size: 2.5rem; margin-bottom: 3rem; text-align: left;">Operating System</h2>
+            <footer style="text-align: center; font-size: 0.85rem; color: var(--ink-light); margin-bottom: 4rem;">
+                &copy; 2024 Brett A McCall. Crafted with code & intention.
+            </footer>
 
-                    <div style="display: grid; gap: 3rem;">
-                        <div style="display: grid; grid-template-columns: 1fr 3fr; gap: 2rem; align-items: start;">
-                            <h3 style="font-size: 1.25rem; color: #666; font-weight: 500;">Role</h3>
-                            <div>
-                                <p style="font-size: 1.25rem; margin-bottom: 1rem;"><strong>I bridge the "Vision"
-                                        gap.</strong></p>
-                                <p style="color: #444; margin-bottom: 1rem;">Most organizations have a gap between their
-                                    visionary ideas and their engineering reality. I live in that gap. I don't just
-                                    "manage products"; I build the human and technical systems that allow teams to ship
-                                    valuable, impactful software.</p>
-                            </div>
-                        </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 3fr; gap: 2rem; align-items: start;">
-                            <h3 style="font-size: 1.25rem; color: #666; font-weight: 500;">Method</h3>
-                            <div>
-                                <p style="font-size: 1.25rem; margin-bottom: 1rem;"><strong>Outcome over
-                                        Output.</strong></p>
-                                <p style="color: #444; margin-bottom: 1rem;">I reject "feature factories." I align teams
-                                    around measurable human behavior changes (outcomes), not just shipping code. My work
-                                    ensures that every sprint moves the needle on participation, learning, or adoption.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CASE STUDIES -->
-            <section id="projects-update" class="section" style="background: #f4f4f4; color: #111;">
-                <div class="container" style="max-width: 1000px;">
-                    <h2 style="font-size: 2.5rem; margin-bottom: 4rem; text-align: left;">Featured Outcomes</h2>
-
-                    <!-- Case Study 1 -->
-                    <div
-                        style="background: #fff; padding: 3rem; border-radius: 4px; margin-bottom: 3rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-                        <div style="margin-bottom: 2rem;">
-                            <span
-                                style="background: #000; color: #fff; padding: 4px 12px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Event
-                                Tech</span>
-                        </div>
-                        <h3 style="font-size: 2rem; margin-bottom: 1.5rem;">TEDx Asheville</h3>
-
-                        <div
-                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                            <div>
-                                <h4
-                                    style="font-size: 0.9rem; color: #888; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
-                                    The Problem</h4>
-                                <p>A high-stakes, volunteer-run event needed to scale without collapsing under chaos.
-                                    Speakers needed to deliver "talks of their lives" with zero technical friction.</p>
-                            </div>
-                            <div>
-                                <h4
-                                    style="font-size: 0.9rem; color: #888; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
-                                    The Move</h4>
-                                <p>I co-founded the organization and engineered a reusable "Production OS"—a system for
-                                    speaker coaching, stage management, and video production that removed fragility.</p>
-                            </div>
-                            <div>
-                                <h4
-                                    style="font-size: 0.9rem; color: #888; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
-                                    The Result</h4>
-                                <p><strong>14 years of sold-out events.</strong> Millions of views online. A resilient
-                                    community institution that survives leadership turnover.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Case Study 2 -->
-                    <div
-                        style="background: #fff; padding: 3rem; border-radius: 4px; margin-bottom: 3rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-                        <div style="margin-bottom: 2rem;">
-                            <span
-                                style="background: #000; color: #fff; padding: 4px 12px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">SaaS
-                                / Non-Profit</span>
-                        </div>
-                        <h3 style="font-size: 2rem; margin-bottom: 1.5rem;">Philanthrosphere</h3>
-
-                        <div
-                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                            <div>
-                                <h4
-                                    style="font-size: 0.9rem; color: #888; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
-                                    The Problem</h4>
-                                <p>Legacy fundraising tools were clunky, leading to slow adoption and frustrated users.
-                                    Development cycles were bloated with "nice-to-haves."</p>
-                            </div>
-                            <div>
-                                <h4
-                                    style="font-size: 0.9rem; color: #888; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
-                                    The Move</h4>
-                                <p>I led a product overhaul focusing on "Donor loop" behaviors. We stripped away 40% of
-                                    the unused features and optimized the core database queries.</p>
-                            </div>
-                            <div>
-                                <h4
-                                    style="font-size: 0.9rem; color: #888; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
-                                    The Result</h4>
-                                <p><strong>30% reduction in development cycles</strong>. A streamlined UI that users
-                                    actually enjoyed, leading to higher data entry compliance.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Case Study 3 -->
-                    <div
-                        style="background: #fff; padding: 3rem; border-radius: 4px; margin-bottom: 3rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-                        <div style="margin-bottom: 2rem;">
-                            <span
-                                style="background: #000; color: #fff; padding: 4px 12px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Immersive
-                                / XR</span>
-                        </div>
-                        <h3 style="font-size: 2rem; margin-bottom: 1.5rem;">Mural XR Project Canvas</h3>
-
-                        <div
-                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                            <div>
-                                <h4
-                                    style="font-size: 0.9rem; color: #888; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
-                                    The Problem</h4>
-                                <p>Remote collaboration in 2D is flat. Teams were losing engagement and spatial context
-                                    during complex mapping sessions.</p>
-                            </div>
-                            <div>
-                                <h4
-                                    style="font-size: 0.9rem; color: #888; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
-                                    The Move</h4>
-                                <p>Designed and launched the XR Project Canvas, translating Mural's 2D stickies into 3D
-                                    spatial environments where users could "walk" through data.</p>
-                            </div>
-                            <div>
-                                <h4
-                                    style="font-size: 0.9rem; color: #888; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
-                                    The Result</h4>
-                                <p><strong>22% increase in first-session retention.</strong> 40% increase in repeat
-                                    engagement. Teams reported feeling "more connected" to the work.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- OFFER -->
-            <section id="offer-update" class="section" style="background: #111; color: #fff; padding: 100px 0;">
-                <div class="container" style="max-width: 800px; text-align: center;">
-                    <h2 style="font-size: 3rem; margin-bottom: 1.5rem;">The Strategy Session</h2>
-                    <p
-                        style="font-size: 1.5rem; color: #ccc; margin-bottom: 4rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                        Stop guessing. Let's spend 2 hours extracting your reality and building a 1-page roadmap.
-                    </p>
-
-                    <div
-                        style="text-align: left; background: #222; padding: 3rem; border-radius: 8px; margin-bottom: 4rem;">
-                        <ul style="list-style: none; margin-bottom: 2rem; display: grid; gap: 1.5rem;">
-                            <li style="display: flex; gap: 1rem; align-items: flex-start;">
-                                <span style="color: #4CAF50; font-weight: bold; font-size: 1.25rem;">✓</span>
-                                <div>
-                                    <strong
-                                        style="color: #fff; font-size: 1.1rem; display: block; margin-bottom: 0.25rem;">Diagnostic
-                                        Deep Dive</strong>
-                                    <span style="color: #aaa;">We map your current blocks, assets, and goals using my
-                                        "Impact Inventory" framework.</span>
-                                </div>
-                            </li>
-                            <li style="display: flex; gap: 1rem; align-items: flex-start;">
-                                <span style="color: #4CAF50; font-weight: bold; font-size: 1.25rem;">✓</span>
-                                <div>
-                                    <strong
-                                        style="color: #fff; font-size: 1.1rem; display: block; margin-bottom: 0.25rem;">The
-                                        "Unseen" Report</strong>
-                                    <span style="color: #aaa;">I identify the energetic and technical leaks you can't
-                                        see because you're too close to the work.</span>
-                                </div>
-                            </li>
-                            <li style="display: flex; gap: 1rem; align-items: flex-start;">
-                                <span style="color: #4CAF50; font-weight: bold; font-size: 1.25rem;">✓</span>
-                                <div>
-                                    <strong
-                                        style="color: #fff; font-size: 1.1rem; display: block; margin-bottom: 0.25rem;">Actionable
-                                        Roadmap</strong>
-                                    <span style="color: #aaa;">You leave with your next 3 moves clearly defined. No
-                                        fluff.</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <a href="mailto:hello@brettamccall.com?subject=Strategy%20Session%20Inquiry" class="cta-button"
-                        style="background: #fff; color: #000; border: none; padding: 1.25rem 2.5rem; font-size: 1.2rem;">Book
-                        a Session</a>
-                    <p style="margin-top: 1.5rem; color: #666; font-size: 0.9rem;">Limited availability. Serious
-                        inquiries only.</p>
-                </div>
-            </section>
         </div>
 
     </main>
