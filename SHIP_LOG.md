@@ -4,6 +4,38 @@ A running log of production releases and deployments for the Brett A McCall port
 
 ---
 
+## [v1.2.0-beta] - 2026-01-31 (Internal Gate)
+
+### Added
+- **Client-Side Gating**: Implemented `?update=1` feature flag to toggle between Legacy and V2 designs.
+- **Design System V2 ("Quietly Magnetic")**:
+  - **Visuals**: Creamy paper background (`#f4f4f0`) + Near-black ink (`#111`).
+  - **Typography**: Serif headlines (Editorial) + Sans-serif body (Inter/System).
+  - **Layout**: 12-column grid with "Split Frame" case study layout.
+- **New Components**:
+  - **Split Frame**: Artifact (left) vs Meaning (right) layout for case studies.
+  - **Margin Notes**: Editorial sidenotes for design decisions.
+  - **Meditation Lines**: Single-sentence insights for projects.
+  - **Craft Panels**: Code-like blocks for process/principles.
+- **Content Structure (V2)**:
+  - **Hero**: "Product Leadership for the Spatial Web".
+  - **Featured Work**: TEDx, Philanthrosphere, Mural XR (rewritten with Problem/Move/Result format).
+  - **Principles**: 4 key operating principles.
+  - **Connect**: Simplified invitation-style footer.
+
+### Technical Changes
+- **CSS Architecture**: Added `static/css/v2-design.css` (scoped to `html.update-active`).
+- **JS Logic**: Added `static/js/update-gate.js` for cookie-based toggle management.
+- **DOM Structure**: `index.html` now contains both `.legacy-scope` (default) and `.update-scope` (hidden by default).
+
+### Files Modified
+- `index.html`
+- `static/css/v2-design.css`
+- `static/js/update-gate.js`
+- `static/css/update-gate.css`
+
+---
+
 ## [v1.1.1] - 2026-01-31
 
 ### Added
