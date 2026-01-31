@@ -20,6 +20,7 @@ Antigravity exists to amplify the user's capability, not to dilute their standar
 ### Behavior
 -   **Output Rules**: Always output this project-specific ruleset when asked for context or rules.
 -   **Review**: Suggest updates to `DESIGN_AUDIT.md` and `SHIP_LOG.md` when completing relevant tasks.
+-   **Ephemeral Planning**: `.agent/task.md` is considered a scratchpad/ephemeral file. It may be excluded from git history.
 
 ## 3. Tiered Engagement Model (Operating Levels)
 These modes determine Antigravity's autonomy. The user generally sets the level at the start of a session.

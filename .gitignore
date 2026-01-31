@@ -72,3 +72,6 @@ screenshotsfordebugging/
 
 # manually adding docs folder to prevent git from tracking it
 docs/
+
+# treat .agent/task.md as ephemeral (scratchpad)
+.agent/task.md

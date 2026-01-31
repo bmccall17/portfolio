@@ -4,7 +4,7 @@ A running log of production releases and deployments for the Brett A McCall port
 
 ---
 
-## [v1.2.0] - 2026-01-31
+## [v1.1.1] - 2026-01-31
 
 ### Added
 - **Binary Leak Effect**: Implemented interactive "Data Vapor" animation in Hero section
