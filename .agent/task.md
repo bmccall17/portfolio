@@ -1,29 +1,33 @@
-# Task: Implement "Binary Leak" Visual Effect [COMPLETED]
+# Task: Implement "Binary Leak" Visual Effect (Refined) [COMPLETED]
 
 ## Context
-The user requested a "Binary Leak Effect" to add dynamic, "fun" aesthetics to the portfolio, likely reinforcing the AI/Tech brand. This will be implemented as a canvas-based animation in the Hero section.
+The user requested a refined "Binary Leak Effect" to be more subtle and interactive. The previous "Matrix rain" was too aggressive.
 
 ## Objectives
-1.  **Create Visual Effect**: Implement a Matrix-style binary rain/leak animation using HTML5 Canvas.
-2.  **Integrate into Hero**: Position the effect behind the hero content but above the background image (or blended with it).
-3.  **Theme Awareness**: Ensure the effect respects the light/dark mode (e.g., dark binary in light mode, bright binary in dark mode? Or maybe always "cyber" green/purple). *Decision*: Let's use the brand colors (`#667eea`, `#764ba2`) for the binary text to match the site aesthetic, rather than generic Matrix green.
-4.  **Performance**: Ensure it pauses when not in viewport (IntersectionObserver).
+1.  **Refine Visual Style**: Change from "falling rain" to "leaking/vaporous" (fading, shrinking, shimmering).
+2.  **Global Scope**: Apply the effect globally (across the site) without interfering with interactions.
+3.  **Mouse Interaction**:
+    *   **Trailing Tail**: Cursor leaves a trail of 0s and 1s.
+    *   **Inactive State**: Leaking intensity increases around the cursor when it stops moving.
+4.  **Performance Check**: Ensure `pointer-events: none` is used so it doesn't block clicks.
 
 ## Implementation Steps
-1.  **Create `static/js/binary-leak.js`**:
-    *   Setup Canvas context.
-    *   Create `BinaryStream` class or functional equivalent.
-    *   Animation loop.
-    *   Resize handling.
-2.  **Modify `index.html`**:
-    *   Add `<canvas id="binary-leak"></canvas>` to `.hero`.
-    *   Import the script.
-    *   Add necessary CSS (absolute positioning).
+1.  **Update `index.html`**:
+    *   Move canvas to `<body>` level (fixed position, full screen).
+    *   Ensure z-index is very low (-1 or just above background).
+2.  **Rewrite `static/js/binary-leak.js`**:
+    *   **Particle System**: Create a `Particle` class (x, y, velocity, opacity, size).
+    *   **Mouse Tracking**: Track mouse x/y and speed/activity status.
+    *   **Spawning Logic**:
+        *   Spawn particles on mouse move (trail).
+        *   Spawn particles around mouse when idle (leak).
+        *   Spawn random ambient particles (vapor).
+    *   **Animation**: Particles float (up/down/drift), shrink, and fade.
 3.  **Styling**:
-    *   Ensure z-index is correct (behind text, above bg).
-    *   Handle opacity/blending.
+    *   Colors: Brand colors + variations for "glimmer".
 
 ## Verification
-*   Visual check: "Leak" effect appears in Hero.
-*   Performance check: Smooth 60fps, no layout thrashing.
-*   Responsiveness: Adapts to window resize.
+*   Effect is visible across all sections.
+*   Mouse movement creates a trail.
+*   Stopping the mouse increases "leaking".
+*   Site is still clickable and interactive.
