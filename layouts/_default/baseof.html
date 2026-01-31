@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
     <meta name="description" content="{{ .Site.Params.description }}">
     <meta name="author" content="{{ .Site.Params.author }}">
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
     <meta property="og:description" content="{{ .Site.Params.description }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ .Permalink }}">
-    
+
     <!-- Preload critical resources -->
-    <link rel="preload" href="{{ "js/main.js" | relURL }}" as="script">
-    
+    <link rel="preload" href="{{ " js/main.js" | relURL }}" as="script">
+
+    <!-- Update Gate -->
+    {{ $updateCss := resources.Get "css/update-gate.css" }}
+    <link rel="stylesheet" href="{{ $updateCss.RelPermalink }}">
+
+    <script>
+        window.UPDATE_DEFAULT_ON = {{ .Site.Params.update_default_on | default false }};
+    </script>
+    {{ $updateJs := resources.Get "js/update-gate.js" }}
+    <script src="{{ $updateJs.RelPermalink }}"></script>
+
     <!-- CSS -->
     <style>
         * {
@@ -23,7 +34,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
@@ -31,13 +42,13 @@
             background: #000;
             overflow-x: hidden;
         }
-        
+
         #react-root {
             min-height: 100vh;
             position: relative;
             z-index: 1;
         }
-        
+
         #three-canvas {
             position: fixed;
             top: 0;
@@ -47,7 +58,7 @@
             z-index: 0;
             pointer-events: none;
         }
-        
+
         .content-overlay {
             position: relative;
             z-index: 2;
@@ -58,14 +69,14 @@
             padding: 2rem;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
-        
+
         @media (max-width: 768px) {
             .content-overlay {
                 margin: 1rem;
                 padding: 1rem;
             }
         }
-        
+
         .loading {
             position: fixed;
             top: 50%;
@@ -77,20 +88,21 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Loading indicator -->
     <div id="loading" class="loading">Loading...</div>
-    
+
     <!-- Three.js canvas mount point -->
     <div id="three-canvas"></div>
-    
+
     <!-- React root -->
     <div id="react-root">
         <div class="content-overlay">
             {{ block "main" . }}{{ end }}
         </div>
     </div>
-    
+
     <!-- Hugo content for SEO -->
     <noscript>
         <div style="padding: 2rem; background: white; color: black;">
@@ -98,20 +110,21 @@
             {{ .Content }}
         </div>
     </noscript>
-    
+
     <!-- Scripts -->
-    <script type="module" src="{{ "js/main.js" | relURL }}"></script>
-    
+    <script type="module" src="{{ " js/main.js" | relURL }}"></script>
+
     <!-- Analytics (supports legacy `googleAnalytics` and new services config). Safe if unset. -->
     {{- $gaID := or (site.Param "googleAnalytics") (site.Config.Services.GoogleAnalytics.ID) -}}
     {{- with $gaID }}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '{{ . }}');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', '{{ . }}');
     </script>
     {{- end }}
 </body>
+
 </html>

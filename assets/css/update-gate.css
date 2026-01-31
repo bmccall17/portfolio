@@ -1,0 +1,22 @@
+
+/* Update Gate Styles */
+.update-scope {
+  display: none !important;
+}
+.legacy-scope {
+  display: none !important;
+}
+
+html.update-active .update-scope {
+  display: block !important;
+}
+
+html.legacy-active .legacy-scope {
+  display: block !important;
+}
+
+/* Ensure no flash of both content if JS is slow (optional, JS is blocking though) */
+/* Default to legacy hidden if we are unsure? No, default to legacy visible for safety.*/
+html:not(.update-active):not(.legacy-active) .update-scope {
+    display: none !important;
+}

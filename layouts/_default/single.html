@@ -1,42 +1,68 @@
 {{ define "main" }}
-<article>
-    <header>
-        <h1>{{ .Title }}</h1>
-        {{ if .Date }}
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+<!-- Legacy Scope -->
+<div class="legacy-scope">
+    <article>
+        <header>
+            <h1>{{ .Title }}</h1>
+            {{ if .Date }}
+            <time datetime="{{ .Date.Format " 2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+            {{ end }}
+        </header>
+
+        <div class="content">
+            {{ .Content }}
+        </div>
+
+        {{ if .Params.tech }}
+        <div style="margin-top: 2rem;">
+            <h3>Technologies Used:</h3>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                {{ range .Params.tech }}
+                <span
+                    style="background: #f0f0f0; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.9rem;">{{
+                    . }}</span>
+                {{ end }}
+            </div>
+        </div>
         {{ end }}
-    </header>
-    
-    <div class="content">
-        {{ .Content }}
-    </div>
-    
-    {{ if .Params.tech }}
-    <div style="margin-top: 2rem;">
-        <h3>Technologies Used:</h3>
-        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
-            {{ range .Params.tech }}
-            <span style="background: #f0f0f0; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.9rem;">{{ . }}</span>
+
+        {{ if or .Params.demo .Params.github }}
+        <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+            {{ if .Params.demo }}
+            <a href="{{ .Params.demo }}" target="_blank" rel="noopener"
+                style="padding: 0.75rem 1.5rem; background: #007acc; color: white; text-decoration: none; border-radius: 0.5rem;">
+                Live Demo
+            </a>
+            {{ end }}
+            {{ if .Params.github }}
+            <a href="{{ .Params.github }}" target="_blank" rel="noopener"
+                style="padding: 0.75rem 1.5rem; background: #333; color: white; text-decoration: none; border-radius: 0.5rem;">
+                GitHub
+            </a>
             {{ end }}
         </div>
+        {{ end }}
+    </article>
+</div>
+
+<!-- Update Scope -->
+<div class="update-scope">
+    {{ $path := "" }}
+    {{ if .File }}
+    {{ $path = printf "/update/%s%s" .File.Dir .File.ContentBaseName }}
+    {{ end }}
+
+    {{ $updatePage := site.GetPage $path }}
+    {{ if $updatePage }}
+    <div style="max-width: 800px; margin: 0 auto; padding: 2rem 1rem;">
+        {{ $updatePage.Content }}
+    </div>
+    {{ else }}
+    <div style="padding: 2rem; text-align: center;">
+        <p>New content for <code>{{ $path }}</code> is coming soon.</p>
+        <p><small>(You are viewing the Update version, but no specific update content was found for this page.)</small>
+        </p>
     </div>
     {{ end }}
-    
-    {{ if or .Params.demo .Params.github }}
-    <div style="margin-top: 2rem; display: flex; gap: 1rem;">
-        {{ if .Params.demo }}
-        <a href="{{ .Params.demo }}" target="_blank" rel="noopener" 
-           style="padding: 0.75rem 1.5rem; background: #007acc; color: white; text-decoration: none; border-radius: 0.5rem;">
-            Live Demo
-        </a>
-        {{ end }}
-        {{ if .Params.github }}
-        <a href="{{ .Params.github }}" target="_blank" rel="noopener"
-           style="padding: 0.75rem 1.5rem; background: #333; color: white; text-decoration: none; border-radius: 0.5rem;">
-            GitHub
-        </a>
-        {{ end }}
-    </div>
-    {{ end }}
-</article>
+</div>
 {{ end }}
