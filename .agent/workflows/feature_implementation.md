@@ -6,6 +6,10 @@ description: Standardized process for implementing new features under Antigravit
 
 This workflow ensures that every feature is planned, compliant, and verified before it is considered "done".
 
+## 0. Repo Sync Gate (User Action)
+- [ ] Ask the user to Fetch/Pull before implementation begins.
+- [ ] Before finalizing, ask the user to Fetch/Pull again before Push (prevents divergence).
+
 ## 1. Planning Phase (Level 1: Observer)
 -   [ ] **Review Requirements**: Understand the user's request.
 -   [ ] **Check Standards**: usage `grep_search` to find relevant patterns in `DESIGN_AUDIT.md` or similar tokens in the codebase.

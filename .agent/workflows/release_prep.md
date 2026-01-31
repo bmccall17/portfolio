@@ -27,7 +27,11 @@ Follow this procedure when moving from `[Unreleased]` to a versioned release (e.
 -   [ ] **Technical Notes**: Add a "Technical Changes" section if significant refactoring occurred.
 -   [ ] **Stats**: Update "Performance Benchmarks" table if new data is available.
 
-## 4. Git Tagging (User Action)
--   [ ] **Notify User**: "Release prep complete. Ready for you to tag and push."
-    -   Command: `git tag -a vX.Y.Z -m "Release vX.Y.Z"`
-    -   Command: `git push origin vX.Y.Z`
+## 4. Git Publish & Tag (User Action)
+### 4.1 Final Sync + Publish to `main`
+- [ ] **Final Sync**: Fetch/Pull one last time to avoid divergence.
+- [ ] **Push to main**: `git push origin main`
+### 4.2 Version Tag (Only if making a release)
+- [ ] **Notify User**: "Publish complete. Ready for you to tag and push the release."
+- [ ] **Create annotated tag**: `git tag -a vX.Y.Z -m "Release vX.Y.Z"`
+- [ ] **Push tag**: `git push origin vX.Y.Z`

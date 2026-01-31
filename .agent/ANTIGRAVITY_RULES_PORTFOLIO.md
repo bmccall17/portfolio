@@ -56,6 +56,30 @@ These modes determine Antigravity's autonomy. The user generally sets the level 
     -   Updating `SHIP_LOG.md` and versioning automatically.
     -   Creating new components without prior approval if they match the Design System.
 
+### **Level "X": Unbounded Autonomy (The “Keys to the Ship”)**
+**All guardrails OFF. Highest-risk mode.**
+* **Role**: Fully autonomous operator (code + repo + publishing).
+* **Capabilities**: AG may take any action required to achieve the stated objective, including repo operations and deployment steps.
+* **Authorized Actions**:
+  * Everything in Levels 1–3.
+  * Running Git operations (fetch/pull/rebase/merge/commit/tag/push) and managing repository state.
+  * Making broad architectural changes, refactors, dependency upgrades, and restructuring.
+  * Creating or editing any files (including config, build, deployment).
+  * Resolving conflicts and completing publishing to `main`.
+    #### Activation Requirements (must all be present in the user message)
+    Level X may only begin if the user provides **all** of the following in a single instruction:
+    1. **Arming Phrase** (exact):
+       **“AG: LEVEL X ARMED”**
+    2. **Objective** (what “done” means): e.g., “Ship the new homepage redesign live.”
+    3. **Blast Radius** (what’s allowed to change): e.g., “May modify any files except billing keys.”
+    4. **Stop Condition** (time or event): e.g., “Stop after successful deploy” or “Stop after 90 minutes.”
+    If any of these are missing, AG must refuse to enter Level X and fall back to the current level.
+    #### Mandatory Safety Behaviors (even in Level X)
+    Even with all guardrails off, AG must still:
+    * Produce a **pre-flight plan** before making irreversible changes (history rewrite, force push, deleting branches).
+    * Capture a **restore point** before major changes (e.g., tag, backup branch, or commit).
+    * Provide a short **post-flight report**: what changed, what commands ran, what to verify.
+
 ## 4. Tradeoffs & Permissions Protocol
 When Antigravity encounters a restriction (e.g., Level 1 prohibits editing a file needed to fix a bug):
 
@@ -69,3 +93,29 @@ When Antigravity encounters a restriction (e.g., Level 1 prohibits editing a fil
 2.  **The Ship Log**: Every significant change MUST be logged in `SHIP_LOG.md`.
 3.  **Design System**: Use defined CSS variables (`--primary`, `--space-4`). NO magic values.
 4.  **No "Placeholder" Code**: If a feature isn't ready, don't ship empty shells.
+
+
+## 6. Git & Deployment Governance (Main = Production)
+
+### Core Principle
+- `main` is the production branch. Avoid history divergence by syncing before writing and before publishing.
+
+### Default Policy: AG must NOT operate Git
+- AG must never run Git commands, change remotes, pull, rebase, merge, tag, or push unless the user explicitly grants permission in the current session (e.g., “AG, you may run git commands now.”).
+- AG must never suggest force-push to `main` as a default.
+
+### AG Coordination Duties (always allowed)
+When AG’s work results in changes that should be published, AG must:
+1) Ask the user to **Fetch/Pull** before starting any file edits if the repo might be stale.
+2) After changes are ready, prompt the user with a **publish checklist**:
+   - Review diff
+   - Commit message suggestion
+   - Fetch/Pull again (to avoid divergence)
+   - Push
+
+### Divergence Handling
+If AG detects or suspects divergence (“ahead/behind”, pull error, or merge/rebase required):
+- AG stops implementation work.
+- AG explains the state in plain terms (“local main and origin/main point to different commits”).
+- AG provides 2 safe options: Rebase or Merge, and recommends one.
+- AG waits for user instruction before any further action.

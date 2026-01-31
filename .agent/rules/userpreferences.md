@@ -14,3 +14,7 @@ based off ".agent\ANTIGRAVITY_RULES_PORTFOLIO.md", changes to these rules should
 -   **Output Rules**: Always output this project-specific ruleset when asked for context or rules.
 -   **Review**: Suggest updates to `DESIGN_AUDIT.md` and `SHIP_LOG.md` when completing relevant tasks.
 
+### Git / Publishing
+- `main` = production.
+- AG does not run Git operations unless I explicitly grant permission.
+- AG must prompt me to Fetch/Pull before starting risky edits and again before I Push.
