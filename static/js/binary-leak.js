@@ -1,69 +1,128 @@
-console.log('[BinaryLeak] Script loaded');
+console.log('[BinaryLeak] Initializing Vapor/Mouse Effect');
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('[BinaryLeak] DOMContentLoaded fired');
-
     const canvas = document.getElementById('binary-leak');
-    if (!canvas) {
-        console.error('[BinaryLeak] Canvas element #binary-leak NOT found in DOM');
-        return;
-    }
-    console.log('[BinaryLeak] Canvas found', canvas);
-
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let width, height;
-    let columns = [];
-    const fontSize = 16;
 
-    // Configuration
-    const chars = '01';
+    let width, height;
+    let particles = [];
     const colorsLight = ['#667eea', '#764ba2', '#a3bffa'];
     const colorsDark = ['#764ba2', '#a3bffa', '#ffffff'];
 
-    function getColors() {
-        const isDark = document.body.classList.contains('dark');
-        console.log('[BinaryLeak] Theme check. Dark mode:', isDark);
-        return isDark ? colorsDark : colorsLight;
-    }
+    // Mouse State
+    let mouse = { x: -100, y: -100, lastX: -100, lastY: -100, lastMove: Date.now() };
+    let isIdle = false;
 
-    function resize() {
-        width = canvas.width = canvas.offsetWidth;
-        height = canvas.height = canvas.offsetHeight;
-        console.log(`[BinaryLeak] Resized to ${width}x${height}`);
+    class Particle {
+        constructor(x, y, type = 'trail') {
+            this.x = x;
+            this.y = y;
+            this.life = 1.0; // 1.0 to 0.0
+            this.char = Math.random() > 0.5 ? '1' : '0';
 
-        const columnCount = Math.floor(width / fontSize);
-        columns = [];
-        for (let i = 0; i < columnCount; i++) {
-            columns[i] = Math.random() * -100;
+            // "Vapor" movement - float slightly up or down, erratic horizontal
+            const speed = Math.random() * 0.5 + 0.2;
+            const angle = Math.random() * Math.PI * 2;
+
+            this.vx = (Math.random() - 0.5) * 0.5; // Slight drift
+            this.vy = type === 'vapor' ? -speed : (Math.random() - 0.5) * 0.5; // Up for vapor, random for static
+
+            this.size = Math.random() * 10 + 8; // 8-18px
+            this.decay = Math.random() * 0.02 + 0.01;
+
+            const palette = document.body.classList.contains('dark') ? colorsDark : colorsLight;
+            this.color = palette[Math.floor(Math.random() * palette.length)];
+        }
+
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            this.life -= this.decay;
+            this.size *= 0.98; // Shrink
+        }
+
+        draw(ctx) {
+            ctx.globalAlpha = this.life;
+            ctx.fillStyle = this.color;
+            ctx.font = `${this.size}px monospace`;
+            ctx.fillText(this.char, this.x, this.y);
+            ctx.globalAlpha = 1.0;
         }
     }
 
-    function animate() {
-        const isDark = document.body.classList.contains('dark');
-        ctx.fillStyle = isDark ? 'rgba(25, 25, 25, 0.1)' : 'rgba(229, 229, 229, 0.1)';
-        ctx.fillRect(0, 0, width, height);
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
 
-        const currentColors = getColors();
-        ctx.font = `${fontSize}px monospace`;
+    function spawnParticle(x, y, type) {
+        particles.push(new Particle(x, y, type));
+    }
 
-        for (let i = 0; i < columns.length; i++) {
-            const char = chars[Math.floor(Math.random() * chars.length)];
-            ctx.fillStyle = currentColors[Math.floor(Math.random() * currentColors.length)];
-            ctx.fillText(char, i * fontSize, columns[i] * fontSize);
+    function handleMouse() {
+        const now = Date.now();
+        const dist = Math.hypot(mouse.x - mouse.lastX, mouse.y - mouse.lastY);
 
-            if (columns[i] * fontSize > height && Math.random() > 0.98) {
-                columns[i] = 0;
+        // Trail Effect
+        if (dist > 2) {
+            spawnParticle(mouse.x, mouse.y, 'trail');
+            mouse.lastMove = now;
+            isIdle = false;
+        }
+
+        // Idle Detection (>200ms stop)
+        if (now - mouse.lastMove > 200) {
+            isIdle = true;
+        }
+
+        // Idle Leaking Effect
+        if (isIdle && mouse.x > 0) {
+            // Spawn more when idle
+            if (Math.random() > 0.8) {
+                const offsetX = (Math.random() - 0.5) * 40;
+                const offsetY = (Math.random() - 0.5) * 40;
+                spawnParticle(mouse.x + offsetX, mouse.y + offsetY, 'vapor');
             }
-            columns[i]++;
+        }
+
+        // Random Ambient Vapor (Background)
+        if (Math.random() > 0.95) {
+            spawnParticle(Math.random() * width, Math.random() * height, 'vapor');
+        }
+
+        mouse.lastX = mouse.x;
+        mouse.lastY = mouse.y;
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height); // Clear frame
+
+        handleMouse();
+
+        // Update and draw particles backwards to remove safely
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            p.update();
+            p.draw(ctx);
+
+            if (p.life <= 0 || p.size < 1) {
+                particles.splice(i, 1);
+            }
         }
 
         requestAnimationFrame(animate);
     }
 
-    // Initialize
+    // Listeners
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
+
+    // Start
     resize();
     animate();
-    console.log('[BinaryLeak] Animation loop started');
-
-    window.addEventListener('resize', resize);
 });

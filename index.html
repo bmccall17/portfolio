@@ -197,14 +197,14 @@
         }
 
         #binary-leak {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.5;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
             pointer-events: none;
+            opacity: 0.6;
         }
 
         .hero-content {
@@ -523,6 +523,7 @@
 </head>
 
 <body class="fade-in">
+    <canvas id="binary-leak"></canvas>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <header>
         <nav class="container">
@@ -540,7 +541,6 @@
 
     <main id="main-content">
         <section class="hero">
-            <canvas id="binary-leak"></canvas>
             <div class="container">
                 <div class="hero-content">
                     <h1>Brett A McCall</h1>
