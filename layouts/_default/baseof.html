@@ -20,6 +20,8 @@
     <!-- Update Gate -->
     {{ $updateCss := resources.Get "css/update-gate.css" }}
     <link rel="stylesheet" href="{{ $updateCss.RelPermalink }}">
+    {{ $v2Css := resources.Get "css/v2-design.css" }}
+    <link rel="stylesheet" href="{{ $v2Css.RelPermalink }}">
 
     <script>
         window.UPDATE_DEFAULT_ON = {{ .Site.Params.update_default_on | default false }};

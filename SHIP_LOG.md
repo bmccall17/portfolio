@@ -4,6 +4,11 @@ A running log of production releases and deployments for the Brett A McCall port
 
 ---
 
+## [Unreleased]
+
+### Added
+- **Scheduler Page**: Dedicated landing page (`/brett`) with Calendly embed and V2 styling.
+
 ## [v1.2.0-beta] - 2026-01-31 (Internal Gate)
 
 ### Added
