@@ -14,24 +14,79 @@ document.addEventListener('DOMContentLoaded', () => {
     let mouse = { x: -100, y: -100, lastX: -100, lastY: -100, lastMove: Date.now() };
     let isIdle = false;
 
+    // CSLP: Infection State
+    let infectionLevel = 0;
+    try {
+        infectionLevel = parseFloat(localStorage.getItem('darketype_infection_level') || 0);
+        if (infectionLevel > 0) console.log(`[BinaryLeak] Infection Detected: Level ${infectionLevel}`);
+    } catch (e) { }
+
+    // CSLP: Singularity Button Logic (Level 0.8+)
+    if (infectionLevel >= 0.8) {
+        spawnSingularityButton();
+    }
+
+    function spawnSingularityButton() {
+        const btn = document.createElement('a');
+        btn.href = 'https://bmccall17.github.io/darketype/index.html';
+        btn.innerHTML = '●';
+        btn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: #000;
+            color: #0f0;
+            border: 1px solid #0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 2s ease;
+            cursor: pointer;
+            box-shadow: 0 0 10px #0f0;
+        `;
+        document.body.appendChild(btn);
+
+        // Assemble effect
+        setTimeout(() => { btn.style.opacity = (infectionLevel - 0.7) * 3; }, 1000);
+
+        btn.addEventListener('hover', () => {
+            btn.innerHTML = '◎';
+        });
+    }
+
     class Particle {
         constructor(x, y, type = 'trail') {
             this.x = x;
             this.y = y;
             this.life = 1.0;
-            this.char = Math.random() > 0.5 ? '1' : '0';
+            this.size = Math.random() * 15 + 10; // Initial size
+            this.vx = (Math.random() - 0.5) * 2; // Initial velocity
+            this.vy = (Math.random() - 0.5) * 2;
 
-            // Chaotic movement
-            const speed = Math.random() * 0.4 + 0.1;
-            const angle = Math.random() * Math.PI * 2;
+            // CSLP: Glitch Mutation (Level 0.3+)
+            // Chance to form a letter of "darketype" instead of binary
+            const glitchChance = Math.max(0, (infectionLevel - 0.2) * 0.1);
+            const targetPhrase = "darketype";
 
-            this.vx = Math.cos(angle) * speed;
-            this.vy = Math.sin(angle) * speed;
-
-            this.size = Math.random() * 10 + 8; // 8-18px
+            if (Math.random() < glitchChance && type === 'vapor') {
+                this.char = targetPhrase[Math.floor(Math.random() * targetPhrase.length)];
+                this.isGlitch = true;
+                this.color = '#00ff41'; // Force green
+            } else {
+                this.char = Math.random() > 0.5 ? '1' : '0';
+                this.isGlitch = false;
+            }
 
             // Persistent idle particles move slightly outward from mouse center if "vapor"
             if (type === 'vapor' && isIdle) {
+                const speed = 0.5;
                 // Calculate angle from mouse
                 const angleFromMouse = Math.atan2(y - mouse.y, x - mouse.x);
                 this.vx = Math.cos(angleFromMouse) * speed;
@@ -42,7 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const palette = document.body.classList.contains('dark') ? colorsDark : colorsLight;
-            this.color = palette[Math.floor(Math.random() * palette.length)];
+            // If not a glitch particle, assign color from palette
+            if (!this.isGlitch) {
+                this.color = palette[Math.floor(Math.random() * palette.length)];
+            }
             this.type = type; // Track type for cleanup
         }
 
@@ -58,6 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fillStyle = this.color;
             ctx.font = `${this.size}px monospace`;
             ctx.fillText(this.char, this.x, this.y);
+
+            // Link Overlay Logic for Glitch Particles?
+            // (Complex to add real <a> tags, but we could detect clicks on canvas if needed. For now just visual.)
+
             ctx.globalAlpha = 1.0;
         }
     }
