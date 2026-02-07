@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) { }
 
     // CSLP: Singularity Button Logic (Level 0.8+)
-    if (infectionLevel >= 0.8) {
-        spawnSingularityButton();
-        buttonSpawned = true;
-    }
+    //  if (infectionLevel >= 0.8) {
+    //      spawnSingularityButton();
+    //      buttonSpawned = true;
+    //  }
 
     // CSLP: Edge Pixel Logic
     const edgePixelSize = 12; // Square size
