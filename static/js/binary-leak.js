@@ -28,6 +28,58 @@ document.addEventListener('DOMContentLoaded', () => {
         buttonSpawned = true;
     }
 
+    // CSLP: Edge Pixel Logic
+    const edgePixelSize = 12; // Square size
+    const edgePixelColor = '#00ff41'; // Matrix Green
+    let edgePixelCount = 0;
+    const MAX_EDGE_PIXELS = 200; // Limit to prevent DOM overload
+
+    // Initialize initial accumulation based on infection level
+    if (infectionLevel > 0) {
+        initEdgePixels(infectionLevel);
+    }
+
+    function initEdgePixels(level) {
+        const density = Math.floor((window.innerHeight / edgePixelSize) * 2 * level * 0.5); // 50% coverage at level 1.0
+        for (let i = 0; i < density; i++) {
+            spawnEdgePixel(Math.random() > 0.5 ? 'left' : 'right', Math.random() * window.innerHeight, true);
+        }
+    }
+
+    function spawnEdgePixel(side, y, isInit = false) {
+        if (edgePixelCount > MAX_EDGE_PIXELS) return; // Cap
+
+        // Probability check (if not init) - higher infection = higher chance to stick
+        if (!isInit && Math.random() > infectionLevel) return;
+
+        const a = document.createElement('a');
+        a.href = "https://bmccall17.github.io/";
+        a.className = "darketype-pixel"; // For potential CSS cleanup
+        a.style.position = 'fixed';
+        a.style.top = `${Math.floor(y / edgePixelSize) * edgePixelSize}px`; // Snap to grid
+        a.style.width = `${edgePixelSize}px`;
+        a.style.height = `${edgePixelSize}px`;
+        a.style.backgroundColor = edgePixelColor;
+        a.style.opacity = Math.random() * 0.5 + 0.3; // Variable opacity for "glitch" look
+        a.style.zIndex = '9998'; // Below button, above content
+        a.style.cursor = 'pointer';
+        a.style.transition = 'opacity 0.2s';
+
+        // Side positioning
+        if (side === 'left') {
+            a.style.left = `${(Math.random() * 5)}px`; // Slight scatter
+        } else {
+            a.style.right = `${(Math.random() * 5)}px`;
+        }
+
+        // Hover Effect
+        a.onmouseover = () => { a.style.opacity = '1'; a.style.boxShadow = `0 0 5px ${edgePixelColor}`; };
+        a.onmouseout = () => { a.style.opacity = '0.5'; a.style.boxShadow = 'none'; };
+
+        document.body.appendChild(a);
+        edgePixelCount++;
+    }
+
     function spawnSingularityButton() {
         const btn = document.createElement('a');
         btn.id = 'singularity-btn'; // Add ID for easier selection if needed
@@ -162,6 +214,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     this.char = this.targetPhrase[Math.floor(Math.random() * this.targetPhrase.length)];
                 }
+            }
+
+            // CSLP: Edge Collision & Accumulation
+            // If particle hits left or right edge, potential to become a pixel
+            if (this.x <= 0) {
+                spawnEdgePixel('left', this.y);
+                this.life = 0; // Kill particle
+            } else if (this.x >= width) {
+                spawnEdgePixel('right', this.y);
+                this.life = 0; // Kill particle
             }
         }
 
