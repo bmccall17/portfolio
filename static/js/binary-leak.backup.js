@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = document.createElement('a');
         btn.href = 'https://bmccall17.github.io/darketype/index.html';
         btn.innerHTML = '●';
-        btn.title = "The Singularity Awaits";
         btn.style.cssText = `
             position: fixed;
             bottom: 20px;
@@ -48,55 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
             font-size: 20px;
             z-index: 9999;
             opacity: 0;
-            transform: scale(0) rotate(-180deg);
-            transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: opacity 2s ease;
             cursor: pointer;
-            box-shadow: 0 0 5px #0f0, inset 0 0 10px rgba(0, 255, 0, 0.2);
-            overflow: hidden;
+            box-shadow: 0 0 10px #0f0;
         `;
-
-        // Singularity Ring Animation
-        const ring = document.createElement('div');
-        ring.style.cssText = `
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(transparent, rgba(0, 255, 65, 0.5), transparent 30%);
-            animation: spin 2s linear infinite;
-            border-radius: 50%;
-            pointer-events: none;
-        `;
-        // We need to inject the keyframes if they don't exist, but inline style is tricky for keyframes.
-        // We'll rely on a simple rotation or just the pulse for now since we can't easily add global CSS.
-        // Actually, let's just use a pulsing shadow for simplicity and robustness in a single file/JS context.
-        btn.style.animation = "pulse-green 2s infinite";
-
-        // Inject style for keyframes
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes pulse-green {
-                0% { box-shadow: 0 0 5px #0f0; }
-                50% { box-shadow: 0 0 20px #0f0, 0 0 10px #0f0 inset; }
-                100% { box-shadow: 0 0 5px #0f0; }
-            }
-        `;
-        document.head.appendChild(style);
-
         document.body.appendChild(btn);
 
-        // Assembly Animation
-        setTimeout(() => {
-            btn.style.opacity = (infectionLevel - 0.7) * 3.3; // Visible at 0.8+, fully opaque at 1.0
-            btn.style.transform = 'scale(1) rotate(0deg)';
-        }, 1000);
+        // Assemble effect
+        setTimeout(() => { btn.style.opacity = (infectionLevel - 0.7) * 3; }, 1000);
 
-        btn.addEventListener('mouseenter', () => {
+        btn.addEventListener('hover', () => {
             btn.innerHTML = '◎';
-            btn.style.background = '#001100';
-        });
-        btn.addEventListener('mouseleave', () => {
-            btn.innerHTML = '●';
-            btn.style.background = '#000';
         });
     }
 
@@ -111,14 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // CSLP: Glitch Mutation (Level 0.3+)
             // Chance to form a letter of "darketype" instead of binary
-            this.glitchChance = Math.max(0, (infectionLevel - 0.2) * 0.1);
-            this.targetPhrase = "darketype";
-            this.isGlitch = Math.random() < this.glitchChance && type === 'vapor';
+            const glitchChance = Math.max(0, (infectionLevel - 0.2) * 0.1);
+            const targetPhrase = "darketype";
 
-            if (this.isGlitch) {
-                this.char = this.targetPhrase[Math.floor(Math.random() * this.targetPhrase.length)];
-                this.color = '#00ff41'; // Force green (Matrix/Singularity color)
-                this.font = 'monospace';
+            if (Math.random() < glitchChance && type === 'vapor') {
+                this.char = targetPhrase[Math.floor(Math.random() * targetPhrase.length)];
+                this.isGlitch = true;
+                this.color = '#00ff41'; // Force green
             } else {
                 this.char = Math.random() > 0.5 ? '1' : '0';
                 this.isGlitch = false;
@@ -149,32 +109,16 @@ document.addEventListener('DOMContentLoaded', () => {
             this.y += this.vy;
             this.life -= this.decay;
             this.size *= 0.96; // Shrink
-
-            // CSLP: Active Glitching
-            // If it's a glitch particle, occasionally mutate the character to flicker
-            if (this.isGlitch && Math.random() > 0.8) {
-                // 50% chance to be binary, 50% chance to be darketype char
-                if (Math.random() > 0.5) {
-                    this.char = Math.random() > 0.5 ? '1' : '0';
-                } else {
-                    this.char = this.targetPhrase[Math.floor(Math.random() * this.targetPhrase.length)];
-                }
-            }
         }
 
         draw(ctx) {
             ctx.globalAlpha = Math.max(0, this.life);
             ctx.fillStyle = this.color;
             ctx.font = `${this.size}px monospace`;
+            ctx.fillText(this.char, this.x, this.y);
 
-            // CSLP: Glitch particles might jitter in position slightly
-            let dx = 0; let dy = 0;
-            if (this.isGlitch) {
-                dx = (Math.random() - 0.5) * 2;
-                dy = (Math.random() - 0.5) * 2;
-            }
-
-            ctx.fillText(this.char, this.x + dx, this.y + dy);
+            // Link Overlay Logic for Glitch Particles?
+            // (Complex to add real <a> tags, but we could detect clicks on canvas if needed. For now just visual.)
 
             ctx.globalAlpha = 1.0;
         }
