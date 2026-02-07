@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // CSLP: Infection State
     let infectionLevel = 0;
+    let buttonSpawned = false; // Track button state
     try {
         infectionLevel = parseFloat(localStorage.getItem('darketype_infection_level') || 0);
         if (infectionLevel > 0) console.log(`[BinaryLeak] Infection Detected: Level ${infectionLevel}`);
@@ -24,10 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // CSLP: Singularity Button Logic (Level 0.8+)
     if (infectionLevel >= 0.8) {
         spawnSingularityButton();
+        buttonSpawned = true;
     }
 
     function spawnSingularityButton() {
         const btn = document.createElement('a');
+        btn.id = 'singularity-btn'; // Add ID for easier selection if needed
         btn.href = 'https://bmccall17.github.io/';
         btn.innerHTML = '●';
         btn.title = "the singularity awaits";
@@ -208,6 +211,21 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Math.random() > 0.5) {
                 spawnParticle(mouse.x, mouse.y, 'trail');
             }
+
+            // CSLP: Increase Infection on Movement
+            // Rate: 0.00005 per pixel approx.
+            infectionLevel += dist * 0.00005;
+            if (infectionLevel > 1) infectionLevel = 1;
+
+            // Update Storage & Check Button (Throttled)
+            if (Math.random() > 0.95) {
+                localStorage.setItem('darketype_infection_level', infectionLevel.toFixed(4));
+
+                if (!buttonSpawned && infectionLevel >= 0.8) {
+                    spawnSingularityButton();
+                    buttonSpawned = true;
+                }
+            }
         }
 
         // Idle Detection (>200ms stop)
@@ -218,7 +236,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Idle Leaking Effect (Accumulation)
         if (isIdle && mouse.x > 0) {
             // Spawn consistently to build up cloud
-            if (Math.random() > 0.8) {
+            // CSLP: Reduced rate (17% of original)
+            if (Math.random() > 0.966) {
                 const offsetX = (Math.random() - 0.5) * 60; // Wider spread
                 const offsetY = (Math.random() - 0.5) * 60;
                 spawnParticle(mouse.x + offsetX, mouse.y + offsetY, 'vapor');
