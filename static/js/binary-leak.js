@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function spawnSingularityButton() {
         const btn = document.createElement('a');
-        btn.href = 'https://bmccall17.github.io/darketype/index.html';
+        btn.href = 'https://bmccall17.github.io/';
         btn.innerHTML = '●';
-        btn.title = "The Singularity Awaits";
+        btn.title = "the singularity awaits";
         btn.style.cssText = `
             position: fixed;
             bottom: 20px;
