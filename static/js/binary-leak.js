@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const edgePixelColor = '#00ff41'; // Matrix Green
     let edgePixelCount = 0;
     const MAX_EDGE_PIXELS = 200; // Limit to prevent DOM overload
+    let edgePixelElements = []; // Track explicitly for effects
 
     // Initialize initial accumulation based on infection level
     if (infectionLevel > 0) {
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         a.style.opacity = Math.random() * 0.5 + 0.3; // Variable opacity for "glitch" look
         a.style.zIndex = '9998'; // Below button, above content
         a.style.cursor = 'pointer';
-        a.style.transition = 'opacity 0.2s';
+        a.style.transition = 'opacity 0.1s, transform 0.05s'; // Fast transform for jitter
 
         // Side positioning
         if (side === 'left') {
@@ -78,6 +79,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.body.appendChild(a);
         edgePixelCount++;
+        edgePixelElements.push({ el: a, y: y, side: side });
+    }
+
+    function handleEdgeEffects() {
+        // Only run if mouse is active
+        if (mouse.x < -50) return;
+
+        const isLeft = mouse.x < 80;
+        const isRight = mouse.x > width - 80;
+
+        if (isLeft || isRight) {
+            // Cursor Corruption: Spawn Glitch Particles
+            if (Math.random() > 0.7) { // 30% chance per frame
+                // Spawn small green squares from cursor
+                const p = new Particle(mouse.x, mouse.y, 'vapor');
+                p.isGlitch = true;
+                p.color = '#00ff41';
+                p.size = Math.random() * 4 + 2;
+                p.vx = (Math.random() - 0.5) * 10; // High speed explode
+                p.vy = (Math.random() - 0.5) * 10;
+                p.life = 0.5; // Short life
+                particles.push(p);
+            }
+
+            // Pixel Jitter
+            const targetSide = isLeft ? 'left' : 'right';
+
+            // Loop through pixels and jitter those near mouse Y
+            for (let i = 0; i < edgePixelElements.length; i++) {
+                const pixel = edgePixelElements[i];
+                if (pixel.side !== targetSide) {
+                    // Reset others
+                    if (pixel.el.style.transform !== '') pixel.el.style.transform = '';
+                    continue;
+                }
+
+                const distY = Math.abs(mouse.y - pixel.y);
+                if (distY < 150) { // Proximity check
+                    // Jitter intensity based on distance
+                    const intensity = (150 - distY) / 10;
+                    const tx = (Math.random() - 0.5) * intensity;
+                    const ty = (Math.random() - 0.5) * intensity;
+                    pixel.el.style.transform = `translate(${tx}px, ${ty}px)`;
+                    pixel.el.style.opacity = '1'; // Light up
+                } else {
+                    if (pixel.el.style.transform !== '') pixel.el.style.transform = '';
+                    if (pixel.el.style.opacity === '1') pixel.el.style.opacity = '0.5'; // Revert opacity logic roughly
+                }
+            }
+        } else {
+            // Reset all if far from edges
+            if (edgePixelElements.length > 0 && edgePixelElements[0].el.style.transform !== '') {
+                edgePixelElements.forEach(p => {
+                    p.el.style.transform = '';
+                    p.el.style.opacity = '0.5'; // Soft reset
+                });
+            }
+        }
     }
 
     function spawnSingularityButton() {
@@ -319,6 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.clearRect(0, 0, width, height);
 
         handleMouse();
+        handleEdgeEffects(); // Run cursor/edge interaction logic
 
         for (let i = particles.length - 1; i >= 0; i--) {
             const p = particles[i];
