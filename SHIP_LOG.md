@@ -9,6 +9,15 @@ A running log of production releases and deployments for the Brett A McCall port
 ### Added
 - **Scheduler Page**: Dedicated landing page (`/brett`) with Calendly embed and V2 styling.
 
+## [v1.1.2] - 2026-02-07
+
+### Added
+- **Cross-Site Leakage Protocol (CSLP)**: Enhanced interaction with `darketype` experimental site.
+  - **Edge Pixels**: "Infected" pixels accumulate on edges as you interact.
+  - **Cursor Glitch**: Interactive particle emission and pixel jitter when near infected zones.
+- **Analytics**: Integrated PostHog for privacy-focused usage tracking.
+- **Copy Update**: "Head of Product" role availability added to hero.
+
 ## [v1.2.0-beta] - 2026-01-31 (Internal Gate)
 
 ### Added
