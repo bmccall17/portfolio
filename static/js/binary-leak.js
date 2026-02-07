@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         a.style.opacity = Math.random() * 0.5 + 0.3; // Variable opacity for "glitch" look
         a.style.zIndex = '9998'; // Below button, above content
         a.style.cursor = 'pointer';
-        a.style.transition = 'opacity 0.1s, transform 0.05s'; // Fast transform for jitter
+        a.style.transition = 'opacity 0.1s, transform 0.3s'; // Slower transform for eerie float
 
         // Side positioning
         if (side === 'left') {
@@ -109,9 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 const distY = Math.abs(mouse.y - pixel.y);
-                if (distY < 150) { // Proximity check
+                if (distY < 300) { // Proximity check (Doubled)
                     // Jitter intensity based on distance
-                    const intensity = (150 - distY) / 10;
+                    const intensity = (300 - distY) / 10 * 0.17; // Reduced by 83%
                     const tx = (Math.random() - 0.5) * intensity;
                     const ty = (Math.random() - 0.5) * intensity;
                     pixel.el.style.transform = `translate(${tx}px, ${ty}px)`;
