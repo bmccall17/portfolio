@@ -16,17 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // CSLP: Infection State
     let infectionLevel = 0;
-    let buttonSpawned = false; // Track button state
     try {
         infectionLevel = parseFloat(localStorage.getItem('darketype_infection_level') || 0);
         if (infectionLevel > 0) console.log(`[BinaryLeak] Infection Detected: Level ${infectionLevel}`);
     } catch (e) { }
-
-    // CSLP: Singularity Button Logic (Level 0.8+)
-    //  if (infectionLevel >= 0.8) {
-    //      spawnSingularityButton();
-    //      buttonSpawned = true;
-    //  }
 
     // CSLP: Edge Pixel Logic
     const edgePixelSize = 12; // Square size
@@ -137,81 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         }
-    }
-
-    function spawnSingularityButton() {
-        const btn = document.createElement('a');
-        btn.id = 'singularity-btn'; // Add ID for easier selection if needed
-        btn.href = 'https://bmccall17.github.io/';
-        btn.innerHTML = '●';
-        btn.title = "the singularity awaits";
-        btn.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 40px;
-            height: 40px;
-            background: #000;
-            color: #0f0;
-            border: 1px solid #0f0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 20px;
-            z-index: 9999;
-            opacity: 0;
-            transform: scale(0) rotate(-180deg);
-            transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            box-shadow: 0 0 5px #0f0, inset 0 0 10px rgba(0, 255, 0, 0.2);
-            overflow: hidden;
-        `;
-
-        // Singularity Ring Animation
-        const ring = document.createElement('div');
-        ring.style.cssText = `
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(transparent, rgba(0, 255, 65, 0.5), transparent 30%);
-            animation: spin 2s linear infinite;
-            border-radius: 50%;
-            pointer-events: none;
-        `;
-        // We need to inject the keyframes if they don't exist, but inline style is tricky for keyframes.
-        // We'll rely on a simple rotation or just the pulse for now since we can't easily add global CSS.
-        // Actually, let's just use a pulsing shadow for simplicity and robustness in a single file/JS context.
-        btn.style.animation = "pulse-green 2s infinite";
-
-        // Inject style for keyframes
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes pulse-green {
-                0% { box-shadow: 0 0 5px #0f0; }
-                50% { box-shadow: 0 0 20px #0f0, 0 0 10px #0f0 inset; }
-                100% { box-shadow: 0 0 5px #0f0; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        document.body.appendChild(btn);
-
-        // Assembly Animation
-        setTimeout(() => {
-            btn.style.opacity = (infectionLevel - 0.7) * 3.3; // Visible at 0.8+, fully opaque at 1.0
-            btn.style.transform = 'scale(1) rotate(0deg)';
-        }, 1000);
-
-        btn.addEventListener('mouseenter', () => {
-            btn.innerHTML = '◎';
-            btn.style.background = '#001100';
-        });
-        btn.addEventListener('mouseleave', () => {
-            btn.innerHTML = '●';
-            btn.style.background = '#000';
-        });
     }
 
     class Particle {
@@ -338,14 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
             infectionLevel += dist * 0.00005;
             if (infectionLevel > 1) infectionLevel = 1;
 
-            // Update Storage & Check Button (Throttled)
+            // Update Storage (Throttled)
             if (Math.random() > 0.95) {
                 localStorage.setItem('darketype_infection_level', infectionLevel.toFixed(4));
-
-                if (!buttonSpawned && infectionLevel >= 0.8) {
-                    spawnSingularityButton();
-                    buttonSpawned = true;
-                }
             }
         }
 
